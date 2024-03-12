@@ -32,16 +32,18 @@ namespace TheGreatSpaceRace
 
         protected override void Initialize()
         {
-            vertices = new VertexPositionColor[3]
+            vertices = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(0, 1, 0), Color.Red),
-                new VertexPositionColor(new Vector3(-1, -1, 0), Color.Green),
-                new VertexPositionColor(new Vector3(1, -1, 0), Color.Blue)
+                new VertexPositionColor(new Vector3(-1, -1, 0), Color.Green),    // Bottom-right,
+                new VertexPositionColor(new Vector3(1, -1, 0), Color.Blue),     // Bottom-left,
+                
+                new VertexPositionColor(new Vector3(-1, 1, 0), Color.Red),     // Top-right
+                new VertexPositionColor(new Vector3(1, 1, 0), Color.Yellow)    // Top-left
             };
 
             effect = new BasicEffect(GraphicsDevice);
 
-            buffer = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 3, BufferUsage.WriteOnly);
+            buffer = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
 
             buffer.SetData(vertices);
 
@@ -81,6 +83,8 @@ namespace TheGreatSpaceRace
             effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up); //where camera is looking, its "up"
 
             effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform
+            //effect.World = Matrix.Identity;
+
 
             effect.VertexColorEnabled = true;
 
@@ -88,7 +92,7 @@ namespace TheGreatSpaceRace
             {
                 pass.Apply();
 
-                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, vertices, 0, 1); //1 triangle, no offset
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, vertices, 0, 2); //1 triangle, no offset
 
 
             }
