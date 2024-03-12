@@ -15,6 +15,47 @@
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BEPUphysics">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysics\bin\Debug\netstandard2.0\BEPUphysics.dll</HintPath>
+    </Reference>
+    <Reference Include="BEPUutilities">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysics\bin\Debug\netstandard2.0\BEPUutilities.dll</HintPath>
+    </Reference>
+    <Reference Include="ConversionHelper">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\ConversionHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\ConversionHelper\bin\Debug\SharpDX.XInput.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />

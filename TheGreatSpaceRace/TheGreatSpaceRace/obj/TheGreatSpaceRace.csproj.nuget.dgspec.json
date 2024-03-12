@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zeynep\\Documents\\COM S 437\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj": {}
+    "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zeynep\\Documents\\COM S 437\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj": {
+    "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zeynep\\Documents\\COM S 437\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj",
+        "projectUniqueName": "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj",
         "projectName": "TheGreatSpaceRace",
-        "projectPath": "C:\\Users\\Zeynep\\Documents\\COM S 437\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj",
+        "projectPath": "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj",
         "packagesPath": "C:\\Users\\Zeynep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zeynep\\Documents\\COM S 437\\TheGreatSpaceRace\\TheGreatSpaceRace\\obj\\",
+        "outputPath": "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zeynep\\AppData\\Roaming\\NuGet\\NuGet.Config",
