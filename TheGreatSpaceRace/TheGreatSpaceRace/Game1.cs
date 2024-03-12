@@ -25,7 +25,14 @@ namespace TheGreatSpaceRace
         VertexPositionColor[] verticesBottomBack;
         VertexPositionColor[] verticesLeftBack;
         VertexPositionColor[] verticesRightBack;
+        VertexPositionColor[] verticesTopEdge;
+        VertexPositionColor[] verticesBottomEdge;
+        VertexPositionColor[] verticesLeftEdge;
+        VertexPositionColor[] verticesRightEdge;
+
+
         BasicEffect effect; //lighting and shading
+
         VertexBuffer bufferTop; //take vertices and pass them to GPU for more efficient read
         VertexBuffer bufferBottom;
         VertexBuffer bufferLeft;
@@ -34,6 +41,10 @@ namespace TheGreatSpaceRace
         VertexBuffer bufferBottomBack;
         VertexBuffer bufferLeftBack;
         VertexBuffer bufferRightBack;
+        VertexBuffer bufferTopEdge;
+        VertexBuffer bufferBottomEdge;
+        VertexBuffer bufferLeftEdge;
+        VertexBuffer bufferRightEdge;
 
         Vector3 position;
         float rotationY;
@@ -112,6 +123,37 @@ namespace TheGreatSpaceRace
                 new VertexPositionColor(new Vector3(-(outerSize - 1), -(outerSize - 1), -1), Color.Yellow)
             };
 
+            verticesTopEdge = new VertexPositionColor[4] //must be clockwise
+            {
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.White),
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.White),
+                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.White),
+                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.White)
+            };
+
+            verticesBottomEdge = new VertexPositionColor[4] //must be clockwise
+            {
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.White),
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.White),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.White),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.White)
+            };
+
+            verticesLeftEdge = new VertexPositionColor[4] //must be clockwise
+            {
+                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.Black),
+            };
+
+            verticesRightEdge = new VertexPositionColor[4] //must be clockwise
+            {
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.Black),
+            };
 
             effect = new BasicEffect(GraphicsDevice);
 
@@ -138,6 +180,18 @@ namespace TheGreatSpaceRace
 
             bufferRightBack = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
             bufferRightBack.SetData(verticesRightBack);
+
+            bufferTopEdge = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
+            bufferTopEdge.SetData(verticesTopEdge);
+
+            bufferBottomEdge = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
+            bufferBottomEdge.SetData(verticesBottomEdge);
+
+            bufferLeftEdge = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
+            bufferLeftEdge.SetData(verticesLeftEdge);
+
+            bufferRightEdge = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
+            bufferRightEdge.SetData(verticesRightEdge);
 
             position = new Vector3(0, 0, 8); //position of shape
 
@@ -193,6 +247,11 @@ namespace TheGreatSpaceRace
                 GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesBottomBack, 0, 2);
                 GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesLeftBack, 0, 2);
                 GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesRightBack, 0, 2);
+
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesTopEdge, 0, 2);
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesBottomEdge, 0, 2);
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesLeftEdge, 0, 2);
+                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesRightEdge, 0, 2);
 
             }
 
