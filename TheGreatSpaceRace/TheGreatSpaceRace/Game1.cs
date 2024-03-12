@@ -42,34 +42,34 @@ namespace TheGreatSpaceRace
         {
             verticesTop = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-2, 2, 0), Color.Red),
-                new VertexPositionColor(new Vector3(2, 2, 0), Color.Red),
-                new VertexPositionColor(new Vector3(-1, 1, 0), Color.Red),
-                new VertexPositionColor(new Vector3(1, 1, 0), Color.Red)
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Red),
+                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Red),
+                new VertexPositionColor(new Vector3(-(outerSize - 1), (outerSize - 1), 0), Color.Red),
+                new VertexPositionColor(new Vector3((outerSize - 1), (outerSize - 1), 0), Color.Red)
             };
 
             verticesBottom = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-2, -2, 0), Color.Green),
-                new VertexPositionColor(new Vector3(2, -2, 0), Color.Green),
-                new VertexPositionColor(new Vector3(-1, -1, 0), Color.Green),
-                new VertexPositionColor(new Vector3(1, -1, 0), Color.Green)
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Green),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Green),
+                new VertexPositionColor(new Vector3(-(outerSize - 1), -(outerSize - 1), 0), Color.Green),
+                new VertexPositionColor(new Vector3((outerSize - 1), -(outerSize - 1), 0), Color.Green)
             };
 
             verticesLeft = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(2, 2, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(1, 1, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(2, -2, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(1, -1, 0), Color.Blue)
+                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Blue),
+                new VertexPositionColor(new Vector3((outerSize - 1), (outerSize - 1), 0), Color.Blue),
+                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Blue),
+                new VertexPositionColor(new Vector3((outerSize - 1), -(outerSize - 1), 0), Color.Blue)
             };
 
             verticesRight = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-2, 2, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-1, 1, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-2, -2, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-1, -1, 0), Color.Yellow)
+                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Yellow),
+                new VertexPositionColor(new Vector3(-(outerSize - 1), (outerSize - 1), 0), Color.Yellow),
+                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Yellow),
+                new VertexPositionColor(new Vector3(-(outerSize - 1), -(outerSize - 1), 0), Color.Yellow)
             };
 
 
@@ -87,7 +87,7 @@ namespace TheGreatSpaceRace
             bufferRight = new VertexBuffer(GraphicsDevice, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
             bufferRight.SetData(verticesTop);
 
-            position = new Vector3(0, 0, 5); //position of shape
+            position = new Vector3(0, 0, 8); //position of shape
 
             base.Initialize();
 
