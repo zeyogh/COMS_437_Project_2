@@ -1,0 +1,2667 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BEPUphysicsDemos</name>
+    </assembly>
+    <members>
+        <member name="T:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput">
+            <summary>
+            Handles input and movement of a character in the game.
+            Acts as a simple 'front end' for the bookkeeping and math of the character controller.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.Camera">
+            <summary>
+            Gets the camera to use for input.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.CharacterController">
+            <summary>
+            Physics representation of the character.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.CameraControlScheme">
+            <summary>
+            Gets the camera control scheme used by the character input.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.IsActive">
+            <summary>
+            Gets whether the character controller's input management is being used.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.Space">
+            <summary>
+            Owning space of the character.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.#ctor(BEPUphysics.Space,BEPUphysicsDemos.Camera,BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs the character and internal physics character controller.
+            </summary>
+            <param name="owningSpace">Space to add the character to.</param>
+            <param name="camera">Camera to attach to the character.</param>
+            <param name="game">The running game.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.Activate">
+            <summary>
+            Gives the character control over the Camera and movement input.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.Deactivate">
+            <summary>
+            Returns input control to the Camera.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.CharacterControllerInput.Update(System.Single,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.GamePadState,Microsoft.Xna.Framework.Input.GamePadState)">
+            <summary>
+            Handles the input and movement of the character.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+            <param name="previousKeyboardInput">The last frame's keyboard state.</param>
+            <param name="keyboardInput">The current frame's keyboard state.</param>
+            <param name="previousGamePadInput">The last frame's gamepad state.</param>
+            <param name="gamePadInput">The current frame's keyboard state.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput">
+            <summary>
+            Handles input and movement of a character in the game.
+            Acts as a simple 'front end' for the bookkeeping and math of the character controller.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.Camera">
+            <summary>
+            Camera to use for input.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.CameraControlScheme">
+            <summary>
+            Gets the camera control scheme used by this input manager.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.CharacterController">
+            <summary>
+            Physics representation of the character.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.IsActive">
+            <summary>
+            Gets whether the character controller's input management is being used.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.Space">
+            <summary>
+            Owning space of the character.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.#ctor(BEPUphysics.Space,BEPUphysicsDemos.Camera,BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs the character and internal physics character controller.
+            </summary>
+            <param name="owningSpace">Space to add the character to.</param>
+            <param name="camera">Camera to attach to the character.</param>
+            <param name="game">The running game.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.Activate">
+            <summary>
+            Gives the character control over the Camera and movement input.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.Deactivate">
+            <summary>
+            Returns input control to the Camera.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.SphereCharacterControllerInput.Update(System.Single,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.GamePadState,Microsoft.Xna.Framework.Input.GamePadState)">
+            <summary>
+            Handles the input and movement of the character.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+            <param name="previousKeyboardInput">The last frame's keyboard state.</param>
+            <param name="keyboardInput">The current frame's keyboard state.</param>
+            <param name="previousGamePadInput">The last frame's gamepad state.</param>
+            <param name="gamePadInput">The current frame's keyboard state.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.AlternateMovement.TankInput">
+            <summary>
+            Handles input and movement of a vehicle in the game.
+            Acts as the 'front end' for the bookkeeping and math of the vehicle within the physics engine.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.leftTrack">
+            <summary>
+            Wheels belonging to the left track of the tank.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.rightTrack">
+            <summary>
+            Wheels belonging to the right track of the tank.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.BackwardSpeed">
+            <summary>
+            Speed that the vehicle tries towreach when moving backward.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.BaseSlidingFriction">
+            <summary>
+            Default coefficient of sliding friction on an individual wheel in the tank track.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.ForwardSpeed">
+            <summary>
+            Speed that the vehicle tries to reach when moving forward.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.IsActive">
+            <summary>
+            Whether or not to use the vehicle's input.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.MaximumDriveForce">
+            <summary>
+            Default maximum force that an individual wheel in a tank track can exert.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.ModelDrawer">
+            <summary>
+            Draws the body and wheels.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.Space">
+            <summary>
+            Owning space of the vehicle.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.Vehicle">
+            <summary>
+            Physics representation of the vehicle.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.TankInput.WheelModels">
+            <summary>
+            List of graphical representations of the wheels on the vehicle.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.TankInput.CameraControlScheme">
+            <summary>
+            Gets the camera control scheme ued by this input manager.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.TankInput.#ctor(BEPUutilities.Vector3,BEPUphysics.Space,BEPUphysicsDemos.Camera,BEPUphysicsDemos.DemosGame,BEPUphysicsDrawer.Models.ModelDrawer,Microsoft.Xna.Framework.Graphics.Model,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructs the front end and the internal physics representation of the vehicle.
+            </summary>
+            <param name="position">Position of the tank.</param>
+            <param name="owningSpace">Space to add the vehicle to.</param>
+            <param name="camera">Camera to attach to the vehicle.</param>
+            <param name="game">Running game.</param>
+            <param name="drawer">Drawer used to draw the tank.</param>
+            <param name="wheelModel">Model to use for the 'wheels' of the tank.</param>
+            <param name="wheelTexture">Texture of the wheels on the tank.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.TankInput.Activate(BEPUutilities.Vector3)">
+            <summary>
+            Gives the vehicle control over the camera and movement input.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.TankInput.Deactivate">
+            <summary>
+            Returns input control to the camera.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.TankInput.Update(System.Single,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.GamePadState)">
+            <summary>
+            Handles the input and movement of the character.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+            <param name="keyboardInput">Keyboard state.</param>
+            <param name="gamePadInput">Gamepad state.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.AlternateMovement.VehicleInput">
+            <summary>
+            Handles input and movement of a Vehicle in the game.
+            Acts as the 'front end' for the bookkeeping and math of the Vehicle within the physics engine.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.BackwardSpeed">
+            <summary>
+            Speed that the Vehicle tries towreach when moving backward.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.ForwardSpeed">
+            <summary>
+            Speed that the Vehicle tries to reach when moving forward.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.IsActive">
+            <summary>
+            Whether or not to use the Vehicle's input.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.MaximumTurnAngle">
+            <summary>
+            Maximum turn angle of the wheels.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.ModelDrawer">
+            <summary>
+            Draws the body and wheels.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.Space">
+            <summary>
+            Owning space of the Vehicle.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.TurnSpeed">
+            <summary>
+            Turning speed of the wheels in radians per second.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.Vehicle">
+            <summary>
+            Physics representation of the Vehicle.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.AlternateMovement.VehicleInput.WheelModels">
+            <summary>
+            List of graphical representations of the wheels on the Vehicle.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.AlternateMovement.VehicleInput.CameraControlScheme">
+            <summary>
+            Gets the camera control scheme ued by this input manager.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.VehicleInput.#ctor(BEPUutilities.Vector3,BEPUphysics.Space,BEPUphysicsDemos.Camera,BEPUphysicsDemos.DemosGame,BEPUphysicsDrawer.Models.ModelDrawer,Microsoft.Xna.Framework.Graphics.Model,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructs the front end and the internal physics representation of the Vehicle.
+            </summary>
+            <param name="position">Position of the Vehicle.</param>
+            <param name="space">Space to add the Vehicle to.</param>
+            <param name="camera">Camera to attach to the Vehicle.</param>
+            <param name="game">The running game.</param>
+            <param name="drawer">Drawer used to draw the Vehicle.</param>
+            <param name="wheelModel">Model of the wheels.</param>
+            <param name="wheelTexture">Texture to use for the wheels.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.VehicleInput.Activate(BEPUutilities.Vector3)">
+            <summary>
+            Gives the Vehicle control over the camera and movement input.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.VehicleInput.Deactivate">
+            <summary>
+            Returns input control to the camera.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.AlternateMovement.VehicleInput.Update(System.Single,Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.GamePadState)">
+            <summary>
+            Handles the input and movement of the character.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+            <param name="keyboardInput">Keyboard state.</param>
+            <param name="gamePadInput">Gamepad state.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.Camera">
+            <summary>
+            Simple camera class for moving around the demos area.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.Position">
+            <summary>
+            Gets or sets the position of the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix of the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.ViewMatrix">
+            <summary>
+            Gets the view matrix of the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.WorldMatrix">
+            <summary>
+            Gets the world transformation of the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.ViewDirection">
+            <summary>
+            Gets or sets the view direction of the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.MaximumPitch">
+            <summary>
+            Gets or sets how far the camera can look up or down in radians.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Camera.LockedUp">
+            <summary>
+            Gets or sets the current locked up vector of the camera.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.#ctor(BEPUutilities.Vector3,System.Single,System.Single,BEPUutilities.Matrix)">
+            <summary>
+            Creates a camera.
+            </summary>
+            <param name="position">Initial position of the camera.</param>
+            <param name="pitch">Initial pitch angle of the camera.</param>
+            <param name="yaw">Initial yaw value of the camera.</param>
+            <param name="projectionMatrix">Projection matrix used.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.MoveForward(System.Single)">
+            <summary>
+            Moves the camera forward.
+            </summary>
+            <param name="distance">Distance to move.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.MoveRight(System.Single)">
+            <summary>
+            Moves the camera to the right.
+            </summary>
+            <param name="distance">Distance to move.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.MoveUp(System.Single)">
+            <summary>
+            Moves the camera up.
+            </summary>
+            <param name="distance">Distance to move.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.Yaw(System.Single)">
+            <summary>
+            Rotates the camera around its locked up vector.
+            </summary>
+            <param name="radians">Amount to rotate.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Camera.Pitch(System.Single)">
+            <summary>
+            Rotates the view direction up or down relative to the locked up vector.
+            </summary>
+            <param name="radians">Amount to rotate.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.CameraControlScheme">
+            <summary>
+            Superclass of implementations which control the behavior of a camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CameraControlScheme.Game">
+            <summary>
+            Gets the game associated with the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CameraControlScheme.Camera">
+            <summary>
+            Gets the camera controlled by this control scheme.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.CameraControlScheme.Update(System.Single)">
+            <summary>
+            Updates the camera state according to the control scheme.
+            </summary>
+            <param name="dt">Time elapsed since previous frame.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.CharacterCameraControlScheme.StandingCameraOffset">
+            <summary>
+            Gets or sets the offset from the position of the character to the 'eyes' while the character is standing.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CharacterCameraControlScheme.CrouchingCameraOffset">
+            <summary>
+            Gets or sets the Offset from the position of the character to the 'eyes' while the character is crouching.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CharacterCameraControlScheme.ProneCameraOffset">
+            <summary>
+            Gets or sets the Offset from the position of the character to the 'eyes' while the character is prone.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CharacterCameraControlScheme.Character">
+            <summary>
+            Gets the character associated with the control scheme.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.CharacterCameraControlScheme.UseCameraSmoothing">
+            <summary>
+            Gets or sets whether or not to smooth the motion of the camera when the character moves discontinuously.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.ChaseCameraControlScheme.ChasedEntity">
+            <summary>
+            Entity to follow around and point at.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.ChaseCameraControlScheme.OffsetFromChaseTarget">
+            <summary>
+            Gets or sets the offset vector from the center of the target chase entity to look at.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.ChaseCameraControlScheme.TransformOffset">
+            <summary>
+            Gets or sets whether or not to transform the offset vector with the rotation of the entity.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.ChaseCameraControlScheme.DistanceToTarget">
+            <summary>
+            Gets or sets the distance away from the target entity to try to maintain.  The distance will be shorter at times if the ray hits an object.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.ChaseCameraControlScheme.ChaseCameraMargin">
+            <summary>
+            Gets or sets the margin of the camera. The camera will be placed no closer to any obstacle than this margin along the ray cast.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.ChaseCameraControlScheme.#ctor(BEPUphysics.Entities.Entity,BEPUutilities.Vector3,System.Boolean,System.Single,BEPUphysicsDemos.Camera,BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Sets up all the information required by the chase camera.
+            </summary>
+            <param name="chasedEntity">Target to follow.</param>
+            <param name="offsetFromChaseTarget">Offset from the center of the entity target to point at.</param>
+            <param name="transformOffset">Whether or not to transform the offset with the target entity's rotation.</param>
+            <param name="distanceToTarget">Distance from the target position to try to maintain.</param>
+            <param name="camera">Camera controlled by the scheme.</param>
+            <param name="game">Running game.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.ConfigurationHelper">
+            <summary>
+            This class contains a bunch of helper functions to set up the simulation for different goals.
+            Try using some of the different profiles in the simulations to see the results.
+            You can also play with the numbers in the profiles to see the results.
+            
+            One configuration option that these functions do not take advantage of is changing the time step.
+            By default, the Space.TimeStepSettings.TimeStepDuration is set to 1/60f.  This is pretty good for most simulations.
+            However, sometimes, you may need to drop the rate down to 1/30f for performance reasons.  This harms the simulation quality quite a bit.
+            On the other hand, the update rate can be increased to 1/120f or more, which vastly increases the simulation quality.
+            
+            When using a non-60hz update rate it's a good idea to pass the elapsed gametime into the Space.Update method (you can find
+            the demos's space update call in the Demo.cs Update function).  This will allow the engine to take as many timesteps are 
+            necessary to keep up with passing time.  Just remember that if the simulation gets too hectic and the engine falls behind,
+            performance will suffer a lot as it takes multiple expensive steps in a single frame trying to catch up.  In addition,
+            since the number of time steps per frame isn't fixed when using internal time stepping, subtle unsmooth motion may creep in.
+            This can be addressed by using the interpolation buffers.  Check out the Updating Asynchronously documentation for more information.
+            [Asynchronous updating isn't needed to use internal time stepping, it's just a common use case.]
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplyDefaultSettings(BEPUphysics.Space)">
+            <summary>
+            Applies the default settings to the space.
+            These values are what the engine starts with; they don't have to be applied unless you just want to get back to the defaults.
+            This doesn't cover every single tunable field in the entire engine, just the main ones that this helper class is messing with.
+            </summary>
+            <param name="space">Space to configure.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplySemiSpeedySettings">
+            <summary>
+            Applies slightly higher speed settings.
+            The only change here is the default minimum iterations.
+            In many simulations, having a minimum iteration count of 0 works just fine.
+            It's a quick and still fairly robust way to get some extra performance.
+            An example of where this might introduce some issues is sphere stacking.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplySuperSpeedySettings(BEPUphysics.Space)">
+            <summary>
+            Applies some low quality, high speed settings.
+            The main benefit comes from the very low iteration cap.
+            By enabling simplex caching, general convex collision detection
+            gets a nice chunk faster, but some curved shapes lose collision detection robustness.
+            </summary>
+            <param name="space">Space to configure.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplyMediumHighStabilitySettings(BEPUphysics.Space)">
+            <summary>
+            Applies some higher quality settings.
+            By using universal continuous collision detection, missed collisions
+            will be much, much rarer.  This actually doesn't have a huge performance cost.
+            The increased iterations put this as a midpoint between the normal and high stability settings.
+            </summary>
+            <param name="space">Space to configure.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplyHighStabilitySettings(BEPUphysics.Space)">
+            <summary>
+            Applies some high quality, low performance settings.
+            By using universal continuous collision detection, missed collisions
+            will be much, much rarer.  This actually doesn't have a huge performance cost.
+            However, increasing the iteration limit and the minimum iterations to 5x the default
+            will incur a pretty hefty overhead.
+            On the upside, pretty much every simulation will be rock-solid.
+            </summary>
+            <param name="space">Space to configure.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ConfigurationHelper.ApplyScale(BEPUphysics.Space,System.Single)">
+            <summary>
+            Scales the configuration settings for collision detection and response to handle
+            a different scale interpretation.  For example, if you want to increase your gravity to -100 from -10 and consider a 5 unit wide box to be tiny,
+            apply a scale of 10 to get the collision response and detection systems to match expectations.
+            </summary>
+            <param name="space">Space to configure.</param>
+            <param name="scale">Scale to apply to relevant configuration settings.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.DemosGame.SwitchSimulation(System.Int32)">
+            <summary>
+            Manages the switch to a new physics engine simulation.
+            </summary>
+            <param name="sim">Index of the simulation to switch to.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.DemosGame.WasKeyPressed(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Determines whether or not the key was pressed this frame.
+            </summary>
+            <param name="key">Key to check.</param>
+            <returns>Whether or not the key was pressed.</returns>
+        </member>
+        <member name="M:BEPUphysicsDemos.DemosGame.WasButtonPressed(Microsoft.Xna.Framework.Input.Buttons)">
+            <summary>
+            Determines whether or not the button was pressed this frame.
+            </summary>
+            <param name="button">Button to check.</param>
+            <returns>Whether or not the button was pressed.</returns>
+        </member>
+        <member name="M:BEPUphysicsDemos.DemosGame.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.DemosGame.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.ActionFigureDemo">
+            <summary>
+            Poseable humanoid with joint friction.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.ActionFigureDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.ActionFigureDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Demo">
+            <summary>
+            Superclass of the sample simulations.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Demo.PhysicsTime">
+            <summary>
+            Gets the average time spent per frame in the physics simulation.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Demo.Name">
+            <summary>
+            Gets the name of the demo.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Demo.Game">
+            <summary>
+            Gets the game this demo belongs to.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Demo.Space">
+            <summary>
+            Gets or sets the space this simulation runs in.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Demo.Update(System.Single)">
+            <summary>
+            Updates the game.
+            </summary>
+            <param name="dt">Game timestep.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Demo.DrawUI">
+            <summary>
+            Draws any extra UI components associated with this demo.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Demo.Draw">
+            <summary>
+            Performs arbitrary drawing associated with this demo.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Demo.CleanUp">
+            <summary>
+            Cleans up this simulation before moving to the next one.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.StandardDemo">
+            <summary>
+            Superclass of the normal demos that let the user
+            shoot spheres, grab things, create vehicles, 
+            and walk around as characters.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.BridgeDemo">
+            <summary>
+            A long string of blocks connected by joints.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.BridgeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.BridgeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.BroadPhaseDemo">
+            <summary>
+            A large bunch of cubes suspended in space.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.BroadPhaseDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.BroadPhaseDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.BuoyancyDemo">
+            <summary>
+            Blocks floating in a viscous fluid.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.BuoyancyDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.BuoyancyDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.CharacterPlaygroundDemo">
+            <summary>
+            A playground for the character controller to frolic in.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.CharacterPlaygroundDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.CharacterPlaygroundDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.CoefficientsDemo">
+            <summary>
+            Boxes slide and spheres bounce.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.CoefficientsDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.CoefficientsDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.CollisionFilteringDemo">
+            <summary>
+            Some objects pass through each other, showing one way in which collision rules function.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.CollisionFilteringDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.CollisionFilteringDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.ColosseumDemo">
+            <summary>
+            Ring-shaped structure made of blocks.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.ColosseumDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.ColosseumDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.CompoundBodiesDemo">
+            <summary>
+            Compound bodies are created from other entities to make concave shapes.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.CompoundBodiesDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.CompoundBodiesDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.DetectorVolumeDemo">
+            <summary>
+            Box changes colors as it interacts with a detector volume.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.DetectorVolumeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.DetectorVolumeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.DiscreteVsContinuousDemo">
+            <summary>
+            Demonstrates the difference between discrete collision detection and continuous collision detection.
+            The default position update mode for objects is Discrete, which means they blindly move forward 
+            based on their velocities every frame.  Continuous mode objects perform a sweep test based on the
+            frame's motion, preventing the object from moving past a collision that would have otherwise significantly
+            altered its trajectory.
+            
+            When a continuous object hits a moving discrete object, the discrete object will still move all the way
+            through its frame's motion and the continuous object will sweep against the discrete's final position.
+            
+            There's a third update mode called "Passive," which is a midpoint between Discrete and Continuous.
+            A discrete object won't perform sweep tests by itself, but it will listen to sweep tests requested by other
+            Continuous objects.  The passive object will then only move up to the first point of contact, rather than 
+            all the way through its frame's motion like a Discrete would.
+            
+            The default mode that entities use can be changed in the MotionSettings.DefaultPositionUpdateMode field.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.DiscreteVsContinuousDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.DiscreteVsContinuousDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.DogbotDemo">
+            <summary>
+            Motorized walking robo-dog.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.DogbotDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.DogbotDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.EarthquakeDemo">
+            <summary>
+            Earthquake simulator with a jenga stack test subject.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.EarthquakeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.EarthquakeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.EntityConstructionDemo">
+            <summary>
+            Demo showing a variety of alternate ways to construct entities.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.EntityConstructionDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.EntityConstructionDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.ClothJointLatticeDemo">
+            <summary>
+            A basic lattice of constraints acting like cloth.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.ClothJointLatticeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.ClothJointLatticeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.GraphicMatchingDemo">
+            <summary>
+            Demo showing how a shape can be constructed from a model and then how to align the graphic with the collision shape.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.GraphicMatchingDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.GraphicMatchingDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.IncomingDemo">
+            <summary>
+            Demo showing a tower of blocks being smashed by a sphere.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.IncomingDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.IncomingDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.ReverseTrikeDemo">
+            <summary>
+            For random tests and general fiddling.
+            </summary>
+            <remarks>
+            This demo type is initially excluded from the main list in the DemosGame.
+            To access it while playing the demos, add an entry to the demoTypes array for this TestDemo.
+            </remarks>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.ReverseTrikeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.ReverseTrikeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.ScaleDemo">
+            <summary>
+            Demonstrates tuning settings for handling different world scales.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.ScaleDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.ScaleDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.VoxelGridShape">
+            <summary>
+            Extremely simple and unoptimized voxel grid shape.
+            Shapes can be shared between multiple collidables.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.VoxelGridShape.Cells">
+            <summary>
+            Three dimensional grid of cells. A true value means the cell is filled, and false means it's empty.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.VoxelGridShape.CellWidth">
+            <summary>
+            Width of a single voxel cell.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.VoxelGrid">
+            <summary>
+            Simple voxel grid collidable. Uses the VoxelGridShape as a data source and provides the 
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.Extras.VoxelGrid.Position">
+            <summary>
+            Position of the minimum corner of the voxel grid.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.VoxelGrid.Events">
+            <summary>
+             Gets the event manager of the mesh.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.VoxelGridConvexContactManifold">
+            <summary>
+            Manages the contacts associated with a convex-voxelgrid collision.
+            This is a slightly different kind of manifold- instead of directly managing collision, it manages
+            a set of testers for each box near the opposing convex.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.VoxelGridConvexPairHandler.CleanUp">
+            <summary>
+             Cleans up the pair handler.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.SimpleVoxelCollidableDemo">
+            <summary>
+            Demo showing the voxel grid in action.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.SimpleVoxelCollidableDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SimpleVoxelCollidableDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.SolidPyramidDemo">
+            <summary>
+            Bunch of blocks arranged in a 3d pyramid, waiting to be blown up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.SolidPyramidDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SolidPyramidDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.Extras.SolverTypeTests.LinearDynamic.Id">
+            <summary>
+            Used to determine lock order in the locking simulator type.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SolverTypeTests.PlaneCollisionConstraint.Distance">
+            <summary>
+            Gets the distance from the plane to the dynamic.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.SolverTypeTests.SimulatorTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SolverTypeTests.SimulatorTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo">
+            <summary>
+            A car built from constraints and entities (as opposed to using the Vehicle class) drives around on a terrain and 
+            sometimes a box.
+            </summary>
+            <remarks>
+            This demo type is initially excluded from the main list in the DemosGame.
+            To access it while playing the demos, add an entry to the demoTypes array for this TestDemo.
+            </remarks>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo2">
+            <summary>
+            <para>A car built from constraints and entities (as opposed to using the Vehicle class) drives around on a terrain and 
+            sometimes a box.</para>
+            <para>This shows a slightly different approach to building a constraint car compared to SuspensionCarDemo; this one has entities representing the suspension.</para>
+            </summary>
+            <remarks>
+            This demo type is initially excluded from the main list in the DemosGame.
+            To access it while playing the demos, add an entry to the demoTypes array for this TestDemo.
+            </remarks>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo2.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.SuspensionCarDemo2.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.AccumulationTestDemo">
+            <summary>
+            Piling up kinematic objects to test some corner cases related to dynamic->kinematic switching.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.AccumulationTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.AccumulationTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.AddRemoveStressDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.AddRemoveStressDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.AddRemoveStressDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.BooleanConvexTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.BooleanConvexTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.BooleanConvexTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.BoxBoxTestDemo">
+            <summary>
+            Demo designed to focus on box-box collision detection.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.BoxBoxTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.BoxBoxTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseMultithreadingTestDemo">
+            <summary>
+            Benchmarks dynamic hierarchy performance under different multithreading conditions.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseMultithreadingTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseMultithreadingTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseRemovalTestDemo">
+            <summary>
+            Tests the speed of broad phase removals.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseRemovalTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhaseRemovalTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhasesTestDemo">
+            <summary>
+            Benchmarks and verifies various broad phases against each other.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhasesTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.BroadPhasesTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.CharacterAddRemoveStressTestDemo">
+            <summary>
+            A nice landscape full of ephemeral people.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.CharacterAddRemoveStressTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.CharacterAddRemoveStressTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressierTestDemo">
+            <summary>
+            A nice landscape full of stranger people.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressierTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressierTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressTestDemo">
+            <summary>
+            A nice landscape full of strange people.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.CharacterStressTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.ConvexHullTestDemo">
+            <summary>
+            Demo testing convex hulls.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.ConvexHullTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.ConvexHullTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.DeterminismTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.DeterminismTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.DeterminismTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.GeneralConvexPairStressDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.GeneralConvexPairStressDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.GeneralConvexPairStressDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo">
+            <summary>
+            Test environment for the inverse kinematics solver.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo2">
+            <summary>
+            Test environment for the inverse kinematics solver.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo2.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.InverseKinematicsTestDemo2.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.KinematicActivityTestDemo">
+            <summary>
+            Checks various corner cases related to kinematic entities and the deactivation system.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.KinematicActivityTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.KinematicActivityTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.LotsOfBoxesTestDemo">
+            <summary>
+            Tests out the performance characteristics associated with lots and lots of boxes.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.LotsOfBoxesTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.LotsOfBoxesTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MobileMeshSolidityTestDemo">
+            <summary>
+            Checks the mobile mesh solidity sidedness calculation.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MobileMeshSolidityTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MobileMeshSolidityTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MoreConstraintsTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MoreConstraintsTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MoreConstraintsTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MPRCastingDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MPRCastingDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MPRCastingDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MPRTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MPRTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MPRTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MultithreadedScalingTestDemo">
+            <summary>
+            Benchmarks and verifies various broad phases against each other.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MultithreadedScalingTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MultithreadedScalingTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MutableCompoundDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MutableCompoundDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MutableCompoundDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.MutableStaticGroupTestDemo">
+            <summary>
+            Demo showing a whole bunch of efficient static geometry that gets shuffled in and out of the StaticGroup at load time.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.MutableStaticGroupTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.MutableStaticGroupTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.ParallelSpaceTestDemo">
+            <summary>
+            Verifies the functionality of multiple spaces running simultaneously.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.ParallelSpaceTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.ParallelSpaceTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.PermutationTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.PermutationTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.PermutationTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.PersistentManifoldStressTestDemo">
+            <summary>
+            Tests out the performance characteristics of the persistent manifold's contact management.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.PersistentManifoldStressTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.PersistentManifoldStressTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.RayCastTestDemo">
+            <summary>
+            Casts a ray against an object and visualizes the result.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.RayCastTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.RayCastTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.SimulationIslandStressTestDemo">
+            <summary>
+            Spheres fall onto a large terrain.  Try driving around on it!
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.SimulationIslandStressTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.SimulationIslandStressTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.StackDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.StackDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.StackDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.TerrainTestDemo">
+            <summary>
+            Test class for performance analysis.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.TerrainTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.TerrainTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.ThreadingTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.ThreadingTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.ThreadingTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.Tests.TwistTestDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.Tests.TwistTestDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.Tests.TwistTestDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Extras.UnfortunateGuyDemo">
+            <summary>
+            A one-armed guy flops on the ground.  Involves a detailed ragdoll-like limb with appropriate limits.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Extras.UnfortunateGuyDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Extras.UnfortunateGuyDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.FancyShapesDemo">
+            <summary>
+            Non-standard shapes like MinkowskiSums, WrappedBodies, and ConvexHulls.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.FancyShapesDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.FancyShapesDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.FishInABarrelDemo">
+            <summary>
+            Put the fish in a barrel, and a box moves.
+            Game of the year!
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.FishInABarrelDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.FishInABarrelDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.InstancedMeshDemo">
+            <summary>
+            Drops some objects onto a field of transformed mesh instances.
+            Instanced meshes are a low-memory usag approach to creating
+            lots of similar static collision objects.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.InstancedMeshDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.InstancedMeshDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.JengaDemo">
+            <summary>
+            A set of jenga blocks.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.JengaDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.JengaDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.LotsOSpheresDemo">
+            <summary>
+            A cube of stacked spheres sits and waits to be knocked over.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.LotsOSpheresDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.LotsOSpheresDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.MobileMeshDemo">
+            <summary>
+            Demo showing a set of entity meshes capable of dynamic movement.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.MobileMeshDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.MobileMeshDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.PathFollowingDemo">
+            <summary>
+            Entities following fancy paths.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.PathFollowingDemo.mover">
+            <summary>
+            Moves the entity.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.PathFollowingDemo.orientationPath">
+            <summary>
+            Defines target orientations over time.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.PathFollowingDemo.positionPath">
+            <summary>
+            Defines target positions over time.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.PathFollowingDemo.rotator">
+            <summary>
+            Rotates the entity.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.Demos.PathFollowingDemo.pathTime">
+            <summary>
+            Incremented and used to evaluate paths in the update method. 
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.PathFollowingDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.PathFollowingDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.PlanetDemo">
+            <summary>
+            Boxes fall on a planetoid.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.PlanetDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.PlanetDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.PyramidDemo">
+            <summary>
+            Bunch of blocks arranged in a 2d pyramid, waiting to be blown up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.PyramidDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.PyramidDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.RagdollDemo">
+            <summary>
+            Poseable humanoid with joint friction.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.RagdollDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.RagdollDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.Ragdoll">
+            <summary>
+            Basic humanoid ragdoll.
+            </summary>
+            <remarks>
+            <para>
+            The following creates the physical parts of a ragdoll (bones and joints).
+            This is only one possible setup for a ragdoll.
+            </para>
+            <para>
+            This example uses AngularMotors to simulate damping between ragdoll bones.
+            A cheaper, though technically less 'realistic' approach, would be to simply
+            change the angular damping property of the involved entities.
+            </para>
+            <para>
+            Because of the large number of constraints and the focus on functional realism,
+            this type of ragdoll should only be used sparingly.  If you need a dozen or more
+            ragdolls going at once, particularly on the Xbox360, it may be a good idea to
+            cut down the realism in favor of performance.
+            </para>
+            <para>
+            The following example does not include a possible optimization for multithreaded
+            simulations.  Since the solver cannot update a entity from more than one constraint
+            at a time (to avoid data corruption), many overlapping constraints will make the solver
+            slow down a bit.  A simulation composed of just a bunch of these ragdolls will incur some 
+            multithreading overhead due to the overlaps.
+            </para>
+            <para>
+            By batching the constraints between any two bones in the ragdoll into a single "SolverGroup"
+            object, the solver only sees a single constraint instead of 3-5 different ones.  This can improve
+            multithreaded performance, but was excluded here for the sake of simplicity.
+            </para>
+            <para>
+            Some of the constraints, like SwivelHingeJoint, are in fact SolverGroups themselves.
+            They contain a variety of configurable sub-constraints.   
+            </para>
+            </remarks>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Ragdoll.Bones">
+            <summary>
+            Gets the bones of the ragdoll.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Ragdoll.Joints">
+            <summary>
+            Gets the joints of the ragdoll.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.RobotArmDemo">
+            <summary>
+            A clawbot spins, swivels, bends, and grabs.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.RobotArmDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.RobotArmDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.SawContraptionDemo">
+            <summary>
+            A spinning blade connected to a piston connected to a spinning box slices up some other boxes.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.SawContraptionDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.SawContraptionDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.SelfCollidingClothDemo">
+            <summary>
+            A basic lattice of constraints acting like cloth.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.SelfCollidingClothDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.SelfCollidingClothDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.SleepModeDemo">
+            <summary>
+            A large number of blocks fall from the sky into stacks and deactivate.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.SleepModeDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.SleepModeDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.SpaceshipDemo">
+            <summary>
+            A spaceship blasts off into the sky (void).
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.SpaceshipDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.SpaceshipDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.SpiderDemo">
+            <summary>
+            A robot with multiple individually controllable legs qwops around.
+            </summary>
+            <remarks>
+            This demo type is initially excluded from the main list in the DemosGame.
+            To access it while playing the demos, add an entry to the demoTypes array for this demo.
+            </remarks>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.SpiderDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.SpiderDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.StaticGroupDemo">
+            <summary>
+            Demo showing a whole bunch of efficient static geometry.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.StaticGroupDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.StaticGroupDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.StaticMeshDemo">
+            <summary>
+            A nice driveable landscape.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.StaticMeshDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.StaticMeshDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.Body">
+            <summary>
+            Gets the main body of the turret. This is connected to the tank body directly.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.Barrel">
+            <summary>
+            Gets the turret arm. This is connected to the turret body.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.TankToTurretJoint">
+            <summary>
+            Gets the constraint which binds the turret body to the tank body. 
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.TurretBodyToBarrelJoint">
+            <summary>
+            Gets the constraint which binds the turret arm to the body.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.YawGoal">
+            <summary>
+            Gets or sets the goal of the yaw motor. Convenience property; accesses TurretToTankJoint.Motor.Settings.Servo.Goal.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.PitchGoal">
+            <summary>
+            Gets or sets the goal of the pitch motor. Convenience property; accesses TurretToTankJoint.Motor.Settings.Servo.Goal.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.MinimumPitch">
+            <summary>
+            Gets or sets the minimum allowed pitch of the tank turret arm. The servo goal will be clamped between the minimum and maximum.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Turret.MaximumPitch">
+            <summary>
+            Gets or sets the maximum allowed pitch of the tank turret arm. The servo goal will be clamped between the minimum and maximum.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.Turret.TryToFire(BEPUphysics.Entities.Prefabs.Sphere@)">
+            <summary>
+            Attempts to fire a projectile.
+            </summary>
+            <param name="shell">The shell fired by the tank. Null if the firing did not succeed.</param>
+            <returns>True if a shell was fired, false otherwise.</returns>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Tread.Segments">
+            <summary>
+            Gets the segments composing this tread.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.Tread.SegmentAngularBindings">
+            <summary>
+            Gets the constraints which bind the segments together, stopping them from rotating separately.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.Entity">
+            <summary>
+            Gets the entity body associated with this tread segment.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.Motor">
+            <summary>
+            Gets the driving motor associated with the segment.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.SuspensionAxisJoint">
+            <summary>
+            Gets the constraint which keeps the segment along the suspension axis.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.SuspensionLengthLimit">
+            <summary>
+            Gets the constraint that stops the segment from going too high or too low along the suspension.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.SuspensionSpring">
+            <summary>
+            Gets the constraint which tries to push the segment away to support the tank.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.SuspensionAngularJoint">
+            <summary>
+            Gets the constraint which keeps the wheel angularly aligned with the body. Allows rotation around the driving axis.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TreadSegment.GoalSpeed">
+            <summary>
+            Gets or sets the goal angular velocity for this segment.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.TankDemo">
+            <summary>
+            A tank built from constraints and entities (as opposed to using the Vehicle class) drives around on a terrain and 
+            sometimes a box. Also, there's other dudes driving around.
+            </summary>
+            <remarks>
+            This demo type is initially excluded from the main list in the DemosGame.
+            To access it while playing the demos, add an entry to the demoTypes array for this TestDemo.
+            </remarks>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.TankDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TankDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.TerrainDemo">
+            <summary>
+            Boxes fall onto a large terrain.  Try driving around on it!
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.TerrainDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TerrainDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.TornadoDemo">
+            <summary>
+            Unsuspecting blocks get ambushed by a whirlwind.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.TornadoDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.TornadoDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.Demos.WallDemo">
+            <summary>
+            Demo showing a wall of blocks stacked up.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.Demos.WallDemo.#ctor(BEPUphysicsDemos.DemosGame)">
+            <summary>
+            Constructs a new demo.
+            </summary>
+            <param name="game">Game owning this demo.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.Demos.WallDemo.Name">
+            <summary>
+            Gets the name of the simulation.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.DisplayGrabSpring">
+            <summary>
+            Graphical representation of a GrabSpring.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.DisplayGrabSpring.Update">
+            <summary>
+            Moves the constraint lines to the proper location relative to the entities involved.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.DisplayMotorizedGrabSpring">
+            <summary>
+            Graphical representation of a GrabSpring.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.DisplayMotorizedGrabSpring.Update">
+            <summary>
+            Moves the constraint lines to the proper location relative to the entities involved.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.FixedOffsetCameraControlScheme.CameraOffset">
+            <summary>
+            Gets or sets the offset from the position of the entity to the camera.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.FixedOffsetCameraControlScheme.Entity">
+            <summary>
+            Gets the character associated with the control scheme.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.FixedOffsetCameraControlScheme.UseCameraSmoothing">
+            <summary>
+            Gets or sets whether or not to smooth the motion of the camera when the character moves discontinuously.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.FreeCameraControlScheme.Speed">
+            <summary>
+            Gets or sets the speed at which the camera moves.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.ModelDataExtractor">
+            <summary>
+            Contains helper methods for extracting vertices and indices from XNA models.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.ModelDataExtractor.GetVerticesAndIndicesFromModel(Microsoft.Xna.Framework.Graphics.Model,BEPUutilities.Vector3[]@,System.Int32[]@)">
+            <summary>
+            Gets an array of vertices and indices from the provided model.
+            </summary>
+            <param name="collisionModel">Model to use for the collision shape.</param>
+            <param name="vertices">Compiled set of vertices from the model.</param>
+            <param name="indices">Compiled set of indices from the model.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ModelDataExtractor.GetVerticesAndIndicesFromModel(Microsoft.Xna.Framework.Graphics.Model,Microsoft.Xna.Framework.Vector3[]@,System.Int32[]@)">
+            <summary>
+            Gets an array of vertices and indices from the provided model.
+            </summary>
+            <param name="collisionModel">Model to use for the collision shape.</param>
+            <param name="vertices">Compiled set of vertices from the model.</param>
+            <param name="indices">Compiled set of indices from the model.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.ModelDataExtractor.AddMesh(Microsoft.Xna.Framework.Graphics.ModelMesh,Microsoft.Xna.Framework.Matrix,System.Collections.Generic.List{Microsoft.Xna.Framework.Vector3},System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            Adds a mesh's vertices and indices to the given lists.
+            </summary>
+            <param name="collisionModelMesh">Model to use for the collision shape.</param>
+            <param name="transform">Transform to apply to the mesh.</param>
+            <param name="vertices">List to receive vertices from the mesh.</param>
+            <param name="indices">List to receive indices from the mesh.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.Explosion">
+            <summary>
+            Handles radial impulse applications on nearby objects when activated.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Explosion.affectedEntries">
+            <summary>
+            Re-used list of entities hit by the explosion.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Explosion.#ctor(BEPUutilities.Vector3,System.Single,System.Single,BEPUphysics.Space)">
+            <summary>
+            Constructs an explosion.
+            </summary>
+            <param name="pos">Initial position of the explosion.</param>
+            <param name="explosionMagnitude">Base strength of the blast as applied in units of impulse.</param>
+            <param name="maxDist">Maximum radius of effect.</param>
+            <param name="containingSpace">Space in which the explosion resides.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Explosion.Position">
+            <summary>
+            Gets or sets the current position of the explosion.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Explosion.Magnitude">
+            <summary>
+            Gets or sets the base strength of the blast.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Explosion.MaxDistance">
+            <summary>
+            Gets or sets the maximum distance that the explosion will affect.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Explosion.Space">
+            <summary>
+            Gets or sets the space that the explosion will explode in.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Explosion.Explode">
+            <summary>
+            Detonates the explosion, applying impulses to applicable physically simulated entities.
+            </summary>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.GravitationalField">
+            <summary>
+            Applies a force on all objects within a field proportional to the inverse square of the distance.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GravitationalField.#ctor(BEPUphysics.UpdateableSystems.ForceFields.ForceFieldShape,BEPUutilities.Vector3,System.Single,System.Single)">
+            <summary>
+            Creates a gravitational field.
+            </summary>
+            <param name="shape">Shape representing the volume of the force field.</param>
+            <param name="origin">Location that entities will be pushed toward.</param>
+            <param name="multiplier">Represents the gravitational constant of the field times the effective mass at the center of the field.</param>
+            <param name="maxAcceleration">Maximum acceleration the field can apply.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GravitationalField.Multiplier">
+            <summary>
+            Gets or sets the gravitational constant of the field times the effective mass at the center of the field.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GravitationalField.MaxAcceleration">
+            <summary>
+            Gets or sets the maximum acceleration that can be applied by the field.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GravitationalField.Origin">
+            <summary>
+            Gets or sets the center of the field that entities will be pushed toward.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GravitationalField.CalculateImpulse(BEPUphysics.Entities.Entity,System.Single,BEPUutilities.Vector3@)">
+            <summary>
+            Calculates the gravitational force to apply to the entity.
+            </summary>
+            <param name="e">Target of the impulse.</param>
+            <param name="dt">Time since the last frame in simulation seconds.</param>
+            <param name="impulse">Force to apply at the given position.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.PushField">
+            <summary>
+            Simple force field which applies a constant force to contained entities.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.PushField.#ctor(BEPUphysics.UpdateableSystems.ForceFields.ForceFieldShape,BEPUutilities.Vector3,System.Single)">
+            <summary>
+            Creates a simple, constant force field.
+            </summary>
+            <param name="shape">Shape representing the volume of the force field.</param>
+            <param name="forceToApply">Force to apply to entities within the field.  Magnitude of the vector represents the magnitude of the force.</param>
+            <param name="maxPushSpeed">Maximum speed that the field will accelerate objects to, regardless of force applied. Set to a non-positive for infinite.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.PushField.Force">
+            <summary>
+            Gets or sets the force to apply to entities within the field.  Magnitude of the vector represents the magnitude of the force.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.PushField.MaximumPushSpeed">
+            <summary>
+            Gets or sets the maximum speed that the field will accelerate objects to, regardless of force applied.  Set to a non-positive value for infinite.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.PushField.CalculateImpulse(BEPUphysics.Entities.Entity,System.Single,BEPUutilities.Vector3@)">
+            <summary>
+            Calculates the impulse to apply to the center of mass of physically simulated bodies within the field.
+            </summary>
+            <param name="e">Target of the impulse.</param>
+            <param name="dt">Time since the last frame in simulation seconds.</param>
+            <param name="impulse">Force to apply at the given position.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.Tornado">
+            <summary>
+            Force field simulating a tornado with circular a 'wind' force, an inward pointing force, and an upward pointing force.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.Axis">
+            <summary>
+            Axis of rotation of the tornado.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.BottomRadius">
+            <summary>
+            Radius of the tornado at the bottom.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.Height">
+            <summary>
+            Height of the tornado; objects above or below the tornado will not be affected by its winds.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.HorizontalForce">
+            <summary>
+            Circular force applied within the tornado.  Force magnitude decreases as distance from axis increases past the radius.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.HorizontalWindSpeed">
+            <summary>
+            Maximum horizontal wind speed of the tornado; objects will not be accelerated by the wind past this speed in the direction of the wind.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.InwardForce">
+            <summary>
+            Magnitude of the inward-sucking force within the tornado.  Magnitude decreases as distance from the axis increases past the radius.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.InwardSuctionSpeed">
+            <summary>
+            Maximum inward sucking wind speed; objects will not be accelerated by the wind past this speed inward.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.SpinClockwise">
+            <summary>
+            Spin direction of the tornado.  Looking down from the top of the tornado (the furthest forward along the tornado axis).
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.TopRadius">
+            <summary>
+            Radius of the tornado at the top.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.UpwardForce">
+            <summary>
+            Magnitude of upward-pushing force within the tornado.  Magnitude decreases as distance from the axis increases past the radius.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.Tornado.UpwardSuctionSpeed">
+            <summary>
+            Maximum upward pushing wind speed; objects will not be accelerated by the wind past this speed upward.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Tornado.#ctor(BEPUphysics.UpdateableSystems.ForceFields.ForceFieldShape,BEPUutilities.Vector3,BEPUutilities.Vector3,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a simple, constant force field.
+            </summary>
+            <param name="shape">Shape representing the tornado-affected volume.</param>
+            <param name="position">Position of the tornado.</param>
+            <param name="axis">Axis of rotation of the tornado.</param>
+            <param name="height">Height of the tornado; objects above or below the tornado will not be affected by its winds.</param>
+            <param name="spinClockwise">Whether or not the tornado's rotation is clockwise.</param>
+            <param name="horizontalWindSpeed">Maximum tangential wind speed; objects will not be accelerated by the wind past this speed sideways.</param>
+            <param name="upwardSuctionSpeed">Maximum upward pushing wind speed; objects will not be accelerated by the wind past this speed upward.</param>
+            <param name="inwardSuctionSpeed">Maximum inward sucking wind speed; objects will not be accelerated by the wind past this speed inward.</param>
+            <param name="horizontalForce">Circular force applied within the tornado.  Force magnitude decreases as distance from axis increases past the radius.</param>
+            <param name="upwardForce">Magnitude of upward-pushing force within the tornado.  Magnitude decreases as distance from the axis increases past the radius.</param>
+            <param name="inwardForce">Magnitude of the inward-sucking force within the tornado.  Magnitude decreases as distance from the axis increases past the radius.</param>
+            <param name="topRadius">Radius of the tornado at the top.</param>
+            <param name="bottomRadius">Radius of the tornado at the bottom.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Tornado.Position">
+            <summary>
+            Gets or sets the position of the tornado.  This is only the origin of the force; move the shape along with it if the position moves away from the shape.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Tornado.CalculateImpulse(BEPUphysics.Entities.Entity,System.Single,BEPUutilities.Vector3@)">
+            <summary>
+            Calculates the impulse to apply to the center of mass of physically simulated bodies within the volume.
+            </summary>
+            <param name="e">Target of the impulse.</param>
+            <param name="dt">Time since the last frame in simulation seconds.</param>
+            <param name="impulse">Force to apply at the given position.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.GrabSpring">
+            <summary>
+            Grabs an entity at a specified location and applies corrective impulses to keep the grabbed location near the goal location.
+            </summary>
+        </member>
+        <member name="F:BEPUphysicsDemos.SampleCode.GrabSpring.localOffset">
+            <summary>
+            Offset from the center of the entity to the grabbed location in local space.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GrabSpring.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a grab constraint.
+            </summary>
+            <param name="correctiveStrength">Factor of the position error to use in corrective impulses each frame.</param>
+            <param name="linearDamp">Damping to apply to the grabbed entity's linear momentum.</param>
+            <param name="angularDamp">Damping to apply to the grabbed entity's angular momentum.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.Entity">
+            <summary>
+            Gets the grabbed entity.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.GoalPosition">
+            <summary>
+            Gets the location that the entity will be pulled towards.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.CorrectionFactor">
+            <summary>
+            Gets or sets the factor of the position error to use in corrective impulses each frame.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.LinearDamping">
+            <summary>
+            Getes or sets damping to apply to the grabbed entity's linear momentum.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.AngularDamping">
+            <summary>
+            Gets or sets damping to apply to the grabbed entity's angular momentum.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.GrabSpring.GrabbedPosition">
+            <summary>
+            Gets the last updated position of the grab location on the surface of the entity.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GrabSpring.Setup(BEPUphysics.Entities.Entity,BEPUutilities.Vector3)">
+            <summary>
+            Reinitializes the grabbing constraint with new information.
+            </summary>
+            <param name="e">Entity to grab.</param>
+            <param name="grabLocation">Location on the entity being grabbed in world space.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GrabSpring.BEPUphysics#UpdateableSystems#IDuringForcesUpdateable#Update(System.Single)">
+            <summary>
+            Applies an appropriate impulse to correct the position of the entity.
+            Called automatically by the space.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.GrabSpring.BEPUphysics#UpdateableSystems#IEndOfFrameUpdateable#Update(System.Single)">
+            <summary>
+            Updates the grab constraint's grab position after the end of a frame.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring">
+            <summary>
+            Grabs an entity at a specified location and applies corrective impulses to keep the grabbed location near the goal location.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.#ctor">
+            <summary>
+            Constructs a grab constraint.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.Entity">
+            <summary>
+            Gets the grabbed entity.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.GoalPosition">
+            <summary>
+            Gets the location that the entity will be pulled towards.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.LocalOffset">
+            <summary>
+            Gets the offset from the entity to the grabbed location in its local space.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.GrabbedPosition">
+            <summary>
+            Gets the last updated position of the grab location on the surface of the entity.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.IsGrabbing">
+            <summary>
+            Gets whether or not the grabber is currently grabbing something.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.Setup(BEPUphysics.Entities.Entity,BEPUutilities.Vector3)">
+            <summary>
+            Reinitializes the grabbing constraint with new information.
+            </summary>
+            <param name="e">Entity to grab.</param>
+            <param name="grabLocation">Location on the entity being grabbed in world space.</param>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.Release">
+            <summary>
+            Releases the entity being held by the grab spring.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.MotorizedGrabSpring.BEPUphysics#UpdateableSystems#IEndOfFrameUpdateable#Update(System.Single)">
+            <summary>
+            Updates the grab constraint's grab position after the end of a frame.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.Thruster">
+            <summary>
+            Simple example updateable that acts like a rocket engine.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Thruster.#ctor(BEPUphysics.Entities.Entity,BEPUutilities.Vector3,BEPUutilities.Vector3,System.Single)">
+            <summary>
+            Constructs a thruster originating at the given position, pushing in the given direction.
+            </summary>
+            <param name="targetEntity">Entity that the force will be applied to.</param>
+            <param name="pos">Origin of the force.</param>
+            <param name="dir">Direction of the force.</param>
+            <param name="time">Total lifespan of the force.  A lifespan of zero is infinite.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Thruster.Position">
+            <summary>
+            Gets or sets the position of the thruster in the local space of the target entity.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Thruster.Direction">
+            <summary>
+            Gets or sets the direction of the force in the local space of the target entity.  Magnitude of the force is equal to the magnitude of the direction.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Thruster.Target">
+            <summary>
+            Gets or sets the entity to apply force to.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Thruster.Age">
+            <summary>
+            Gets or sets the length of time that the thruster has been firing.
+            This can be reset to 'refresh' the life of the force.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.Thruster.LifeSpan">
+            <summary>
+            Maximum life span of the force, after which the thruster will deactivate.
+            Set to 0 for infinite lifespan.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.Thruster.BEPUphysics#UpdateableSystems#IDuringForcesUpdateable#Update(System.Single)">
+            <summary>
+            Applies the thruster forces.
+            Called automatically by the owning space during a space update.
+            </summary>
+            <param name="dt">Simulation timestep.</param>
+        </member>
+        <member name="T:BEPUphysicsDemos.SampleCode.UprightSpring">
+            <summary>
+            Spring that attempts to keep a target entity oriented in a given direction by applying corrective torques.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.UprightSpring.#ctor(BEPUphysics.Entities.Entity,BEPUutilities.Vector3,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a constraint to keep entities upright.
+            </summary>
+            <param name="entity">Entity to try to keep upright.</param>
+            <param name="upVector">Direction to try to orient the entity with.</param>
+            <param name="minimumAngle">Minimum angle between the car's transformed up vector and the actual up vector
+            before the constraint begins to apply forces.</param>
+            <param name="maximumAngle">Maximum angle between the car's transformed up vector and the actual up vector
+            past which the constraint 'gives up' and lets the entity tumble.</param>
+            <param name="correctionFactor">Factor of the orientation error to apply in angular velocity each frame.</param>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.Entity">
+            <summary>
+            Gets or sets the entity to try to keep upright.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.LocalUpVector">
+            <summary>
+            Gets or sets the up vector attached to the entity in its local space.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.UpVector">
+            <summary>
+            Gets or sets the up vector attached to the entity in world space.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.MinimumAngle">
+            <summary>
+            Gets or sets the minimum angle between the car's transformed up vector and the actual up vector
+            before the constraint begins to apply forces.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.MaximumAngle">
+            <summary>
+            Gets or sets the maximum angle between the car's transformed up vector and the actual up vector
+            past which the constraint 'gives up' and lets the entity tumble.
+            </summary>
+        </member>
+        <member name="P:BEPUphysicsDemos.SampleCode.UprightSpring.CorrectionFactor">
+            <summary>
+            Gets or sets the factor of the orientation error to apply in torque each frame.
+            </summary>
+        </member>
+        <member name="M:BEPUphysicsDemos.SampleCode.UprightSpring.BEPUphysics#UpdateableSystems#IDuringForcesUpdateable#Update(System.Single)">
+            <summary>
+            Updates the upright constraint.
+            Called automatically by its owning space.
+            </summary>
+            <param name="dt">Time since last frame in simulation seconds.</param>
+        </member>
+    </members>
+</doc>

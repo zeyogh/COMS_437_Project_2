@@ -19,6 +19,12 @@
     <Reference Include="BEPUphysics">
       <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysics\bin\Debug\netstandard2.0\BEPUphysics.dll</HintPath>
     </Reference>
+    <Reference Include="BEPUphysicsDemos">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysicsDemos\bin\Debug\BEPUphysicsDemos.exe</HintPath>
+    </Reference>
+    <Reference Include="BEPUphysicsDrawer">
+      <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysicsDemos\bin\Debug\BEPUphysicsDrawer.dll</HintPath>
+    </Reference>
     <Reference Include="BEPUutilities">
       <HintPath>..\..\..\bepuphysics1-1.5.2\bepuphysics1-1.5.2\BEPUphysics\bin\Debug\netstandard2.0\BEPUutilities.dll</HintPath>
     </Reference>
