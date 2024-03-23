@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace TheGreatSpaceRace
 {
@@ -37,35 +38,56 @@ namespace TheGreatSpaceRace
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                camPosition.X -= 0.1f;
-                camTarget.X -= 0.1f;
-            }
+            float rotationSpeed = 0.02f;
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                camPosition.X += 0.1f;
-                camTarget.X += 0.1f;
+                float deltaX = camTarget.X - camPosition.X;
+                float deltaZ = camTarget.Z - camPosition.Z;
+                float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
+                float angle = (float)Math.Atan2(deltaZ, deltaX) + rotationSpeed;
+                camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
+                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                camPosition.Y -= 0.1f;
-                camTarget.Y -= 0.1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                camPosition.Y += 0.1f;
-                camTarget.Y += 0.1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                camPosition.Z += 0.1f;
+                float deltaX = camTarget.X - camPosition.X;
+                float deltaZ = camTarget.Z - camPosition.Z;
+                float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
+                float angle = (float)Math.Atan2(deltaZ, deltaX) - rotationSpeed;
+                camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
+                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                camPosition.Z -= 0.1f;
+                camPosition.Z += 0.1f;
+                //camPosition.Y -= 0.1f;
+                //camTarget.Y -= 0.1f;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                camPosition.Z -= 0.1f;
+                //camPosition.Y += 0.1f;
+                //camTarget.Y += 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                float deltaY = camTarget.Y - camPosition.Y;
+                float deltaZ = camTarget.Z - camPosition.Z;
+                float distance = (float)Math.Sqrt(deltaY * deltaY + deltaZ * deltaZ);
+                float angle = (float)Math.Atan2(deltaZ, deltaY) + rotationSpeed;
+                camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
+                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                float deltaY = camTarget.Y - camPosition.Y;
+                float deltaZ = camTarget.Z - camPosition.Z;
+                float distance = (float)Math.Sqrt(deltaY * deltaY + deltaZ * deltaZ);
+                float angle = (float)Math.Atan2(deltaZ, deltaY) - rotationSpeed;
+                camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
+                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+            }
+            /*if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 orbit = !orbit;
             }
@@ -76,7 +98,7 @@ namespace TheGreatSpaceRace
                                         MathHelper.ToRadians(1f));
                 camPosition = Vector3.Transform(camPosition,
                               rotationMatrix);
-            }
+            }*/
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
                          Vector3.Up);
         }
