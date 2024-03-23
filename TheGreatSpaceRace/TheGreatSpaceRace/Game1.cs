@@ -20,7 +20,8 @@ namespace TheGreatSpaceRace
 
         Ring ring;
 
-        Skybox skybox;
+        //Skybox skybox;
+        Model skysphere;
         Matrix world = Matrix.Identity;
         Matrix view = Matrix.CreateLookAt(new Vector3(20, 0, 0), new Vector3(0, 0, 0), Vector3.UnitY);
         Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 600f, 0.1f, 100f);
@@ -28,7 +29,9 @@ namespace TheGreatSpaceRace
         float angle = 0;
         float distance = 20;
 
-        Camera camera;
+        Matrix viewMatrix;
+        Matrix projectionMatrix;
+        float[] cv = { 0f, 0f, 15f };
 
         BasicEffect effect; //lighting and shading
 
@@ -38,7 +41,7 @@ namespace TheGreatSpaceRace
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            camera = new Camera(BEPUutilities.Vector3.Zero, 0, 0, BEPUutilities.Matrix.CreatePerspectiveFieldOfViewRH(MathHelper.PiOver4, Graphics.PreferredBackBufferWidth / (float)Graphics.PreferredBackBufferHeight, .1f, 10000));
+            //camera = new Camera(BEPUutilities.Vector3.Zero, 0, 0, BEPUutilities.Matrix.CreatePerspectiveFieldOfViewRH(MathHelper.PiOver4, Graphics.PreferredBackBufferWidth / (float)Graphics.PreferredBackBufferHeight, .1f, 10000));
 
             Content.RootDirectory = "Content";
         }
@@ -59,15 +62,14 @@ namespace TheGreatSpaceRace
 
             GraphicsDevice.RasterizerState = RasterizerState.CullNone; //have to be careful with vertices, declare vertices in clockwise fashion
 
+            skysphere = Content.Load<Model>("skysphere");
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            skybox = new Skybox("SunInSpace", Content);
-
-            // TODO: use this.Content to load your game content here
+            viewMatrix = Matrix.CreateLookAt(new Vector3(cv[0], cv[1], cv[2]), Vector3.Zero, Vector3.Up);
+            projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.1f, 1000.0f);
         }
 
         protected override void Update(GameTime gameTime)
@@ -90,20 +92,32 @@ namespace TheGreatSpaceRace
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            /*RasterizerState r = _spriteBatch.GraphicsDevice.RasterizerState;
-
-            RasterizerState r1 = new RasterizerState();
-            r1.CullMode = CullMode.CullClockwiseFace;
-            skybox.Draw(view, projection, cameraPosition);
-            r1.CullMode = CullMode.CullCounterClockwiseFace;
-
-            _spriteBatch.GraphicsDevice.RasterizerState = r;*/
-
-            effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f); //closest object can get to camera, farthest object can get to camera
+            DepthStencilState originalDepthStencilState = GraphicsDevice.DepthStencilState;
+            GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
 
             effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up); //where camera is looking, its "up"
 
-            effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform
+            Matrix sphereWorld = Matrix.CreateTranslation(-cameraPosition);
+
+            foreach (ModelMesh mesh in skysphere.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    float aspectRatio = GraphicsDevice.Viewport.AspectRatio;
+                    //effect.World = Matrix.CreateScale(0.3f * aspectRatio, 0.5f * aspectRatio, 0.5f) * Matrix.CreateRotationY(rotationY); //makes the skybox SPIN!
+                    //effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -0.5f), Vector3.Forward, Vector3.Up); //makes a ring
+                    effect.World = Matrix.CreateScale(0.3f * aspectRatio, 0.5f * aspectRatio, 0.5f) * Matrix.CreateTranslation(0, 0, 1);
+                    effect.AmbientLightColor = new Vector3(1f, 0, 0);
+                    //effect.World *= Matrix.CreateScale(0.99f); //this makes a cool effect
+                }
+                effect.World = Matrix.CreateScale(0.5f);
+                mesh.Draw();
+            }
+
+            GraphicsDevice.DepthStencilState = originalDepthStencilState;
+
+            effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f);
+            effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform                                                                                                //effect.World = Matrix.Identity;
             //effect.World = Matrix.Identity;
 
             effect.VertexColorEnabled = true;

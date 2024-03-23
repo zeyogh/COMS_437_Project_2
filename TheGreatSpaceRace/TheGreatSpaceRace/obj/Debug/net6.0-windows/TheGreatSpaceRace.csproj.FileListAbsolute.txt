@@ -43,10 +43,6 @@ C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGrea
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\SharpDX.RawInput.dll
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\ConversionHelper.pdb
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\ConversionHelper.xml
-C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\skybox.xnb
-C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\SunInSpace.xnb
-C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\SkyboxFX.xnb
-C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\Sunset.xnb
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUphysicsDemos.exe
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUphysicsDrawer.dll
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUik.dll
@@ -57,3 +53,6 @@ C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGrea
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUphysicsDrawer.xml
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUphysicsDrawer.dll.config
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\BEPUik.pdb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\skysphere.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\starry_sky_sphere.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\starry_sky_sphere_0.xnb

@@ -51,10 +51,10 @@ namespace TheGreatSpaceRace
         /// <param name="view">The view matrix for the effect</param>
         /// <param name="projection">The projection matrix for the effect</param>
         /// <param name="cameraPosition">The position of the camera</param>
-        public void Draw(Matrix view, Matrix projection, Vector3 cameraPosition)
+        public void Draw(GraphicsDevice graphics)
         {
             // Go through each pass in the effect, but we know there is only one...
-            foreach (EffectPass pass in skyBoxEffect.CurrentTechnique.Passes)
+            /*foreach (EffectPass pass in skyBoxEffect.CurrentTechnique.Passes)
             {
                 // Draw all of the components of the mesh, but we know the cube really
                 // only has one mesh
@@ -75,7 +75,10 @@ namespace TheGreatSpaceRace
                     // Draw the mesh with the skybox effect
                     mesh.Draw();
                 }
-            }
+            }*/
+            graphics.RasterizerState = RasterizerState.CullNone;
+
+            graphics.RasterizerState = RasterizerState.CullClockwise;
         }
     }
 }
