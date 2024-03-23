@@ -60,14 +60,10 @@ namespace TheGreatSpaceRace
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 camPosition.Z += 0.1f;
-                //camPosition.Y -= 0.1f;
-                //camTarget.Y -= 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 camPosition.Z -= 0.1f;
-                //camPosition.Y += 0.1f;
-                //camTarget.Y += 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
@@ -87,18 +83,6 @@ namespace TheGreatSpaceRace
                 camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
             }
-            /*if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                orbit = !orbit;
-            }
-
-            if (orbit)
-            {
-                Matrix rotationMatrix = Matrix.CreateRotationY(
-                                        MathHelper.ToRadians(1f));
-                camPosition = Vector3.Transform(camPosition,
-                              rotationMatrix);
-            }*/
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
                          Vector3.Up);
         }
@@ -109,7 +93,6 @@ namespace TheGreatSpaceRace
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    //effect.EnableDefaultLighting();
                     effect.AmbientLightColor = new Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
                     effect.World = worldMatrix;
