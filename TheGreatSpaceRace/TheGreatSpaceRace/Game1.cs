@@ -10,6 +10,7 @@ using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using System;
+using BEPUphysicsDrawer.Models;
 
 namespace TheGreatSpaceRace
 {
@@ -29,9 +30,7 @@ namespace TheGreatSpaceRace
         float angle = 0;
         float distance = 20;
 
-        Matrix viewMatrix;
-        Matrix projectionMatrix;
-        float[] cv = { 0f, 0f, 15f };
+        Camera2 camera;
 
         BasicEffect effect; //lighting and shading
 
@@ -48,6 +47,7 @@ namespace TheGreatSpaceRace
 
         protected override void Initialize()
         {
+
             effect = new BasicEffect(GraphicsDevice);
 
             ring = new Ring(GraphicsDevice, effect);
@@ -63,19 +63,24 @@ namespace TheGreatSpaceRace
             GraphicsDevice.RasterizerState = RasterizerState.CullNone; //have to be careful with vertices, declare vertices in clockwise fashion
 
             skysphere = Content.Load<Model>("skysphere");
+            camera = new Camera2(_graphics, skysphere);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            viewMatrix = Matrix.CreateLookAt(new Vector3(cv[0], cv[1], cv[2]), Vector3.Zero, Vector3.Up);
-            projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.1f, 1000.0f);
+
+            //skybox = new Skybox("SunInSpace", Content);
+
+            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            camera.Update(gameTime);
 
             float deltatime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -88,9 +93,15 @@ namespace TheGreatSpaceRace
             base.Update(gameTime);
         }
 
+
+
         protected override void Draw(GameTime gameTime)
         {
+            //View Matrix –> Camera Location | Projection Matrix –> Camera Lens | World Matrix –> Object Position/Orientation in 3D Scene
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            camera.Draw(gameTime);
+
 
             DepthStencilState originalDepthStencilState = GraphicsDevice.DepthStencilState;
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
@@ -119,6 +130,9 @@ namespace TheGreatSpaceRace
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f);
             effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform                                                                                                //effect.World = Matrix.Identity;
             //effect.World = Matrix.Identity;
+
+            float deltatime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
 
             effect.VertexColorEnabled = true;
 
