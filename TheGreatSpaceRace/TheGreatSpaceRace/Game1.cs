@@ -100,11 +100,7 @@ namespace TheGreatSpaceRace
             //View Matrix –> Camera Location | Projection Matrix –> Camera Lens | World Matrix –> Object Position/Orientation in 3D Scene
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            camera.Draw(gameTime);
-
-
-            DepthStencilState originalDepthStencilState = GraphicsDevice.DepthStencilState;
-            GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
+            camera.Draw(gameTime, ring, GraphicsDevice, effect, rotationY);
 
             effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up); //where camera is looking, its "up"
 
@@ -123,15 +119,13 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }*/
 
-            GraphicsDevice.DepthStencilState = originalDepthStencilState;
-
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f);
             effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform                                                                                                //effect.World = Matrix.Identity;
             //effect.World = Matrix.Identity;
 
             effect.VertexColorEnabled = true;
 
-            ring.Draw(GraphicsDevice, effect);
+            //ring.Draw(GraphicsDevice, effect);
 
             base.Draw(gameTime);
         }
