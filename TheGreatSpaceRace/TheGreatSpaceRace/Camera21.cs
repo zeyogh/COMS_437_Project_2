@@ -71,38 +71,22 @@ namespace TheGreatSpaceRace
             // Up
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                // Calculate the direction vector from position to target
                 Vector3 direction = camTarget - camPosition;
-                // Calculate the distance between position and target
                 float distance = direction.Length();
-                // Normalize the direction vector
                 direction.Normalize();
-
-                // Calculate the right vector perpendicular to direction and the world up vector
                 Vector3 right = Vector3.Cross(direction, Vector3.Up);
-                // Rotate the direction vector around the right vector
                 direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, rotationAngle));
-
-                // Update the target position based on the rotated direction
                 camTarget = camPosition + direction * distance;
             }
 
             // Down
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                // Calculate the direction vector from position to target
                 Vector3 direction = camTarget - camPosition;
-                // Calculate the distance between position and target
                 float distance = direction.Length();
-                // Normalize the direction vector
                 direction.Normalize();
-
-                // Calculate the right vector perpendicular to direction and the world up vector
                 Vector3 right = Vector3.Cross(direction, Vector3.Up);
-                // Rotate the direction vector around the right vector in the opposite direction
                 direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, -rotationAngle));
-
-                // Update the target position based on the rotated direction
                 camTarget = camPosition + direction * distance;
             }
 
@@ -130,10 +114,11 @@ namespace TheGreatSpaceRace
 
             g.DepthStencilState = originalDepthStencilState;
 
-            ringEffect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up);
-            ringEffect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, g.Viewport.AspectRatio, 0.001f, 1000f);
-            Vector3 position = camPosition;
-            ringEffect.World = Matrix.Identity * Matrix.CreateTranslation(new Vector3(0, 0, 8)) * Matrix.CreateTranslation(position);
+            ringEffect.AmbientLightColor = new Vector3(1f, 0, 0);
+            ringEffect.View = viewMatrix;
+            ringEffect.World = worldMatrix * Matrix.CreateTranslation(0, 0, 18);
+            ringEffect.Projection = projectionMatrix;
+
             ringEffect.VertexColorEnabled = true;
 
             ring.Draw(g, ringEffect);
