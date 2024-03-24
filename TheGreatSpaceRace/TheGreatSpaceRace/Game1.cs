@@ -108,9 +108,7 @@ namespace TheGreatSpaceRace
 
             effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up); //where camera is looking, its "up"
 
-            Matrix sphereWorld = Matrix.CreateTranslation(-cameraPosition);
-
-            foreach (ModelMesh mesh in skysphere.Meshes)
+            /*foreach (ModelMesh mesh in skysphere.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
@@ -123,16 +121,13 @@ namespace TheGreatSpaceRace
                 }
                 effect.World = Matrix.CreateScale(0.5f);
                 mesh.Draw();
-            }
+            }*/
 
             GraphicsDevice.DepthStencilState = originalDepthStencilState;
 
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f);
             effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform                                                                                                //effect.World = Matrix.Identity;
             //effect.World = Matrix.Identity;
-
-            float deltatime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
 
             effect.VertexColorEnabled = true;
 

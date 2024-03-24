@@ -38,13 +38,13 @@ namespace TheGreatSpaceRace
 
         public void Update(GameTime gameTime)
         {
-            float rotationSpeed = 0.02f;
+            float rotationAngle = MathHelper.ToRadians(1.0f);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 float deltaX = camTarget.X - camPosition.X;
                 float deltaZ = camTarget.Z - camPosition.Z;
                 float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaX) + rotationSpeed;
+                float angle = (float)Math.Atan2(deltaZ, deltaX) + rotationAngle;
                 camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
             }
@@ -53,35 +53,42 @@ namespace TheGreatSpaceRace
                 float deltaX = camTarget.X - camPosition.X;
                 float deltaZ = camTarget.Z - camPosition.Z;
                 float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaX) - rotationSpeed;
+                float angle = (float)Math.Atan2(deltaZ, deltaX) - rotationAngle;
                 camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
             }
+            Vector3 forward = Vector3.Normalize(camTarget - camPosition);
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                camPosition.Z += 0.1f;
+                camPosition += forward * 0.1f;
+                System.Diagnostics.Debug.WriteLine(camPosition);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                camPosition.Z -= 0.1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                float deltaY = camTarget.Y - camPosition.Y;
-                float deltaZ = camTarget.Z - camPosition.Z;
-                float distance = (float)Math.Sqrt(deltaY * deltaY + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaY) + rotationSpeed;
-                camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
-                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+                camPosition -= forward * 0.1f;
+                System.Diagnostics.Debug.WriteLine(camPosition);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 float deltaY = camTarget.Y - camPosition.Y;
                 float deltaZ = camTarget.Z - camPosition.Z;
                 float distance = (float)Math.Sqrt(deltaY * deltaY + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaY) - rotationSpeed;
+                float angle = Math.Max(-MathHelper.PiOver2 + 0.01f, Math.Abs((float)Math.Atan2(deltaZ, deltaY) - rotationAngle)); // The Math.Max helps avoid stuttering
+                angle = MathHelper.Clamp(angle, -MathHelper.PiOver2 + 0.01f, MathHelper.PiOver2 * 2 - 0.01f); // Keep the angle within -π/2 to +π/2 range
                 camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+                System.Diagnostics.Debug.WriteLine(MathHelper.ToDegrees(angle));
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                float deltaY = camTarget.Y - camPosition.Y;
+                float deltaZ = camTarget.Z - camPosition.Z;
+                float distance = (float)Math.Sqrt(deltaY * deltaY + deltaZ * deltaZ);
+                float angle = (float)Math.Atan2(deltaZ, deltaY) + rotationAngle; // Calculate the new angle
+                angle = MathHelper.Clamp(angle, -MathHelper.PiOver2 + 0.01f, MathHelper.PiOver2 * 2 - 0.01f); // Keep the angle within -π/2 to +π/2 range
+                camTarget.Y = camPosition.Y + distance * (float)Math.Cos(angle);
+                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+                System.Diagnostics.Debug.WriteLine(MathHelper.ToDegrees(angle));
             }
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
                          Vector3.Up);
@@ -95,7 +102,7 @@ namespace TheGreatSpaceRace
                 {
                     effect.AmbientLightColor = new Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
-                    effect.World = worldMatrix;
+                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(camPosition.X, camPosition.Y, camPosition.Z);
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();
