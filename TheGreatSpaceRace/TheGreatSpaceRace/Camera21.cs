@@ -13,6 +13,8 @@ namespace TheGreatSpaceRace
         Matrix projectionMatrix;
         Matrix viewMatrix;
         Matrix worldMatrix;
+        bool hasRotated = false;
+        bool fixedPos = false;
 
         //Geometric info
         Model model;
@@ -47,6 +49,7 @@ namespace TheGreatSpaceRace
                 float angle = (float)Math.Atan2(deltaZ, deltaX) + rotationAngle;
                 camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+                hasRotated = true;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
@@ -56,19 +59,8 @@ namespace TheGreatSpaceRace
                 float angle = (float)Math.Atan2(deltaZ, deltaX) - rotationAngle;
                 camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
                 camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
+                hasRotated = true;
             }
-            Vector3 forward = Vector3.Normalize(camTarget - camPosition);
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                camPosition += forward * 0.1f;
-                System.Diagnostics.Debug.WriteLine(camPosition);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                camPosition -= forward * 0.1f;
-                System.Diagnostics.Debug.WriteLine(camPosition);
-            }
-            // Up
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 Vector3 direction = camTarget - camPosition;
@@ -77,9 +69,8 @@ namespace TheGreatSpaceRace
                 Vector3 right = Vector3.Cross(direction, Vector3.Up);
                 direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, rotationAngle));
                 camTarget = camPosition + direction * distance;
+                hasRotated = true;
             }
-
-            // Down
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 Vector3 direction = camTarget - camPosition;
@@ -88,6 +79,25 @@ namespace TheGreatSpaceRace
                 Vector3 right = Vector3.Cross(direction, Vector3.Up);
                 direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, -rotationAngle));
                 camTarget = camPosition + direction * distance;
+                hasRotated = true;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                Vector3 direction = Vector3.Normalize(camTarget - camPosition);
+                camPosition += direction * 1f;
+                camTarget += direction * 1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                Vector3 direction = Vector3.Normalize(camTarget - camPosition);
+                camPosition -= direction * 1f;
+                camTarget -= direction * 1f;
+            }
+
+
+            if (hasRotated && fixedPos)
+            {
+                fixedPos = false;
             }
 
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
@@ -112,11 +122,13 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }
 
+
             g.DepthStencilState = originalDepthStencilState;
 
             ringEffect.AmbientLightColor = new Vector3(1f, 0, 0);
             ringEffect.View = viewMatrix;
             ringEffect.World = worldMatrix * Matrix.CreateTranslation(0, 0, 18);
+
             ringEffect.Projection = projectionMatrix;
 
             ringEffect.VertexColorEnabled = true;
