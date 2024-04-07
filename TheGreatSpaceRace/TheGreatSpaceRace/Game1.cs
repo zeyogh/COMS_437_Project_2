@@ -11,6 +11,7 @@ using Matrix = Microsoft.Xna.Framework.Matrix;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using System;
 using BEPUphysicsDrawer.Models;
+using BEPUphysicsDrawer.Font;
 
 namespace TheGreatSpaceRace
 {
@@ -19,7 +20,14 @@ namespace TheGreatSpaceRace
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Ring ring;
+        public TextDrawer dataTextDrawer;
+        SpriteFont dfont;
+
+        //Ring[] rings = new Ring[1];
+        Ring2[] rings = new Ring2[7];
+        bool[] ringStatus = new bool[7];
+        int lap = 0;
+        //Ring ring;
 
         //Skybox skybox;
         Model skysphere;
@@ -50,7 +58,11 @@ namespace TheGreatSpaceRace
 
             effect = new BasicEffect(GraphicsDevice);
 
-            ring = new Ring(GraphicsDevice, effect);
+            //ring = new Ring(GraphicsDevice, effect);
+            /*for (int i = 0; i < rings.Length; i++)
+            {
+                rings[i] = new Ring(GraphicsDevice, effect, i, 0, 0, i + 10 + (i * 4));
+            }*/
 
             position = new Vector3(0, 0, 8); //position of shape
 
@@ -63,12 +75,21 @@ namespace TheGreatSpaceRace
             GraphicsDevice.RasterizerState = RasterizerState.CullNone; //have to be careful with vertices, declare vertices in clockwise fashion
 
             skysphere = Content.Load<Model>("skysphere");
+            Random rand = new Random();
+            for (int i = 0; i < rings.Length; i++)
+            {
+                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)));
+                rings[i].ring = Content.Load<Model>("ring");
+            }
             camera = new Camera2(_graphics, skysphere);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            dfont = Content.Load<SpriteFont>("posdisplayfont");
+            dataTextDrawer = new TextDrawer(_spriteBatch, dfont, Color.White);
 
             //skybox = new Skybox("SunInSpace", Content);
 
@@ -77,8 +98,13 @@ namespace TheGreatSpaceRace
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+
+            lapFinished();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || lap >= 3)
                 Exit();
+
+            checkRings();
 
             camera.Update(gameTime);
 
@@ -100,34 +126,52 @@ namespace TheGreatSpaceRace
             //View Matrix –> Camera Location | Projection Matrix –> Camera Lens | World Matrix –> Object Position/Orientation in 3D Scene
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            camera.Draw(gameTime, ring, GraphicsDevice, effect, rotationY);
+            camera.Draw(gameTime, rings, GraphicsDevice, effect, rotationY);
 
             effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -5), Vector3.Forward, Vector3.Up); //where camera is looking, its "up"
 
-            /*foreach (ModelMesh mesh in skysphere.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    float aspectRatio = GraphicsDevice.Viewport.AspectRatio;
-                    //effect.World = Matrix.CreateScale(0.3f * aspectRatio, 0.5f * aspectRatio, 0.5f) * Matrix.CreateRotationY(rotationY); //makes the skybox SPIN!
-                    //effect.View = Matrix.CreateLookAt(new Vector3(0, 0, -0.5f), Vector3.Forward, Vector3.Up); //makes a ring
-                    effect.World = Matrix.CreateScale(0.3f * aspectRatio, 0.5f * aspectRatio, 0.5f) * Matrix.CreateTranslation(0, 0, 1);
-                    effect.AmbientLightColor = new Vector3(1f, 0, 0);
-                    //effect.World *= Matrix.CreateScale(0.99f); //this makes a cool effect
-                }
-                effect.World = Matrix.CreateScale(0.5f);
-                mesh.Draw();
-            }*/
-
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000f);
-            effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform                                                                                                //effect.World = Matrix.Identity;
-            //effect.World = Matrix.Identity;
+            effect.World = Matrix.Identity * Matrix.CreateRotationY(rotationY) * Matrix.CreateTranslation(position); //how the object should be drawn out, local -> world transform
 
             effect.VertexColorEnabled = true;
 
-            //ring.Draw(GraphicsDevice, effect);
+            _spriteBatch.Begin(rasterizerState: RasterizerState.CullNone);
+                
+#if !WINDOWS
+                dataTextDrawer.Draw("Press Start for Controls", new Vector2(50, bottom - 82));
+#else
+                dataTextDrawer.Draw("Press F1 for Controls", new System.Numerics.Vector2(50, 100));
+#endif
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        public bool lapFinished()
+        {
+            foreach (bool ring in ringStatus)
+            {
+                if (!ring)
+                {
+                    return false;
+                }
+            }
+            lap++;
+            for (int i = 0; i < ringStatus.Length; i++)
+            {
+                ringStatus[i] = false;
+            }
+            return true;
+        }
+
+        public void checkRings()
+        {
+            foreach (Ring2 ring in rings)
+            {
+                int state = ring.checkShipState(camera.camPosition);
+            }
+        }
+
     }
 }

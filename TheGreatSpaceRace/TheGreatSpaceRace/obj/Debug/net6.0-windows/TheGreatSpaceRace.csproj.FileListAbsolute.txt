@@ -56,3 +56,7 @@ C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGrea
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\skysphere.xnb
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\starry_sky_sphere.xnb
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\starry_sky_sphere_0.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\posdisplayfont.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\ring.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\ringComplete.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\ringNext.xnb

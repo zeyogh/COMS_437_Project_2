@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TheGreatSpaceRace
 {
@@ -10,14 +11,17 @@ namespace TheGreatSpaceRace
         VertexPositionColor[] verticesBottom;
         VertexPositionColor[] verticesLeft;
         VertexPositionColor[] verticesRight;
+
         VertexPositionColor[] verticesTopBack;
         VertexPositionColor[] verticesBottomBack;
         VertexPositionColor[] verticesLeftBack;
         VertexPositionColor[] verticesRightBack;
+
         VertexPositionColor[] verticesTopEdgeOuter;
         VertexPositionColor[] verticesBottomEdgeOuter;
         VertexPositionColor[] verticesLeftEdgeOuter;
         VertexPositionColor[] verticesRightEdgeOuter;
+
         VertexPositionColor[] verticesTopEdgeInner;
         VertexPositionColor[] verticesBottomEdgeInner;
         VertexPositionColor[] verticesLeftEdgeInner;
@@ -44,134 +48,140 @@ namespace TheGreatSpaceRace
         private int outerSize = 4;
         private int innerSize = 3;
 
-        public Ring(GraphicsDevice gd, BasicEffect basic)
+        private int state = 0;
+
+        private int order;
+
+        public Ring(GraphicsDevice gd, BasicEffect basic, int order, int offsetX, int offsetY, int offsetZ)
         {
+            this.order = order;
+
             verticesTop = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Red),
-                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Red),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, 0), Color.Red),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, 0), Color.Red)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Red)
             };
 
             verticesBottom = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Green),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Green),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, 0), Color.Green),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, 0), Color.Green)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Green)
             };
 
             verticesLeft = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Blue),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, 0), Color.Blue)
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Blue)
             };
 
             verticesRight = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Yellow),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, 0), Color.Yellow)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Yellow)
             };
 
             verticesTopBack = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.Red),
-                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.Red),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, -1), Color.Red),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, -1), Color.Red)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Red),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Red)
             };
 
             verticesBottomBack = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.Green),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.Green),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, -1), Color.Green),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, -1), Color.Green)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Green),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Green)
             };
 
             verticesLeftBack = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.Blue),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, -1), Color.Blue),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.Blue),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, -1), Color.Blue)
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Blue),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Blue)
             };
 
             verticesRightBack = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.Yellow),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, -1), Color.Yellow),
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.Yellow),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, -1), Color.Yellow)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Yellow),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Yellow)
             };
 
             verticesTopEdgeOuter = new VertexPositionColor[4] //must be clockwise
 {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.White),
-                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.White)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.White)
 };
 
             verticesBottomEdgeOuter = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.White),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.White)
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.White)
             };
 
             verticesLeftEdgeOuter = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(outerSize, outerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(outerSize, outerSize, -1), Color.Black),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(outerSize, -outerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Black),
             };
 
             verticesRightEdgeOuter = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(-outerSize, outerSize, -1), Color.Black),
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(-outerSize, -outerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, outerSize+offsetY, -1+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-outerSize+offsetX, -outerSize+offsetY, -1+offsetZ), Color.Black),
             };
 
             verticesTopEdgeInner = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, -1), Color.White),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, -1), Color.White)
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.White)
             };
 
             verticesBottomEdgeInner = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, -1), Color.White),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, 0), Color.White),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, -1), Color.White)
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.White),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.White)
             };
 
             verticesLeftEdgeInner = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(innerSize, innerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(innerSize, innerSize, -1), Color.Black),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(innerSize, -innerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Black),
             };
 
             verticesRightEdgeInner = new VertexPositionColor[4] //must be clockwise
             {
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(-innerSize, innerSize, -1), Color.Black),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, 0), Color.Black),
-                new VertexPositionColor(new Vector3(-innerSize, -innerSize, -1), Color.Black),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, innerSize+offsetY, -1+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, 0+offsetZ), Color.Black),
+                new VertexPositionColor(new Vector3(-innerSize+offsetX, -innerSize+offsetY, -1+offsetZ), Color.Black),
             };
 
             bufferTop = new VertexBuffer(gd, VertexPositionColor.VertexDeclaration, 4, BufferUsage.WriteOnly);
@@ -250,6 +260,31 @@ namespace TheGreatSpaceRace
                 gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, verticesRightEdgeInner, 0, 2);
 
             }
+        }
+
+        public int checkShipState(Vector3 shipPosition)
+        {
+            System.Diagnostics.Debug.WriteLine("Ship: " + shipPosition + " vs front: " 
+                + verticesTopBack[0].Position.Z + " vs back: " + verticesTop[0].Position.Z);
+            if (Math.Abs(verticesTopBack[0].Position.Z - shipPosition.Z) < 0.001f && state == 0) //path through entrance
+            {
+                state++;
+                System.Diagnostics.Debug.WriteLine("State shift from 0 to 1");
+            }
+            else if (verticesTopBack[0].Position.Z < shipPosition.Z
+                     && verticesTop[0].Position.Z > shipPosition.Z
+                     && state == 1) //inside ring
+            {
+                state++;
+                System.Diagnostics.Debug.WriteLine("State shift from 1 to 2");
+            }
+            else if (Math.Abs(verticesTop[0].Position.Z - shipPosition.Z) < 0.001f && state == 2) //leaving ring
+            {
+                state++;
+                System.Diagnostics.Debug.WriteLine("State shift from 2 to 3");
+            }
+
+            return state;
         }
 
     }

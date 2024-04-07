@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+//using Vector3 = BEPUutilities.Vector3;
+//using Matrix = BEPUutilities.Vector3;
 
 namespace TheGreatSpaceRace
 {
@@ -9,7 +11,7 @@ namespace TheGreatSpaceRace
     {
         //Cameras
         Vector3 camTarget;
-        Vector3 camPosition;
+        public Vector3 camPosition;
         Matrix projectionMatrix;
         Matrix viewMatrix;
         Matrix worldMatrix;
@@ -104,7 +106,7 @@ namespace TheGreatSpaceRace
                          Vector3.Up);
         }
 
-        public void Draw(GameTime gameTime, Ring ring, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
+        public void Draw(GameTime gameTime, Ring2[] rings, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
         {
 
             DepthStencilState originalDepthStencilState = g.DepthStencilState;
@@ -114,7 +116,7 @@ namespace TheGreatSpaceRace
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.AmbientLightColor = new Vector3(1f, 0, 0);
+                    effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
                     effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(camPosition.X, camPosition.Y, camPosition.Z);
                     effect.Projection = projectionMatrix;
@@ -122,18 +124,25 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }
 
+            foreach (Ring2 ring in rings)
+            {
+
+                foreach (ModelMesh mesh in ring.ring.Meshes)
+                {
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
+                        effect.View = viewMatrix;
+                        effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(ring.pos.X, ring.pos.Y, ring.pos.Z);
+                        effect.Projection = projectionMatrix;
+                    }
+                    mesh.Draw();
+                }
+
+            }
+
 
             g.DepthStencilState = originalDepthStencilState;
-
-            ringEffect.AmbientLightColor = new Vector3(1f, 0, 0);
-            ringEffect.View = viewMatrix;
-            ringEffect.World = worldMatrix * Matrix.CreateTranslation(0, 0, 18);
-
-            ringEffect.Projection = projectionMatrix;
-
-            ringEffect.VertexColorEnabled = true;
-
-            ring.Draw(g, ringEffect);
         }
     }
 }
