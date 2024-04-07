@@ -137,11 +137,7 @@ namespace TheGreatSpaceRace
 
             _spriteBatch.Begin(rasterizerState: RasterizerState.CullNone);
                 
-#if !WINDOWS
-                dataTextDrawer.Draw("Press Start for Controls", new Vector2(50, bottom - 82));
-#else
-                dataTextDrawer.Draw("Press F1 for Controls", new System.Numerics.Vector2(50, 100));
-#endif
+                dataTextDrawer.Draw("Time Left:: " + (int)(500f - gameTime.TotalGameTime.TotalSeconds) + "s.", new System.Numerics.Vector2(50, 450));
 
             _spriteBatch.End();
 
