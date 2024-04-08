@@ -26,6 +26,7 @@ namespace TheGreatSpaceRace
         //Ring[] rings = new Ring[1];
         Ring2[] rings = new Ring2[7];
         bool[] ringStatus = new bool[7];
+        int ringCurrent = 0;
         int lap = 0;
         //Ring ring;
 
@@ -81,6 +82,7 @@ namespace TheGreatSpaceRace
                 rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)));
                 rings[i].ring = Content.Load<Model>("ring");
             }
+            rings[0].ring = Content.Load<Model>("ringNext");
             camera = new Camera2(_graphics, skysphere);
         }
 
@@ -166,6 +168,11 @@ namespace TheGreatSpaceRace
             foreach (Ring2 ring in rings)
             {
                 int state = ring.checkShipState(camera.camPosition);
+                if (ring == rings[ringCurrent] && state >= 2)
+                {
+                    rings[ringCurrent].ring = Content.Load<Model>("ringComplete");
+                    ringCurrent++;
+                }
             }
         }
 
