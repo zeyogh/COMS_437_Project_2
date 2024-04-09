@@ -52,8 +52,10 @@ namespace TheGreatSpaceRace
                                MathHelper.ToRadians(45f), graphics.
                                GraphicsDevice.Viewport.AspectRatio,
                                 1f, 1000f);
-            viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position + ship.WorldTransform.Forward),
-                         convertVector3ToXNA(ship.WorldTransform.Right));
+            viewMatrix = Matrix.CreateLookAt(new Vector3(0, 0, -5), new Vector3(0, 0, 0),
+                         Vector3.Up);
+            //viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position + ship.WorldTransform.Forward),
+            //convertVector3ToXNA(ship.WorldTransform.Right));
             worldMatrix = Matrix.CreateWorld(convertVector3ToXNA(ship.Position),
                          convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
         }
@@ -151,7 +153,18 @@ namespace TheGreatSpaceRace
                 {
                     effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
-                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * convertMatrixToXNA(ship.WorldTransform);
+                    effect.World = Matrix.CreateScale(30, 30, 30) * convertMatrixToXNA(ship.WorldTransform);
+                    effect.Projection = projectionMatrix;
+                }
+                mesh.Draw();
+            }
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
+                    effect.View = viewMatrix;
+                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * convertMatrixToXNA(ship.WorldTransform) * Matrix.CreateTranslation(1, -15, 1);
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();
