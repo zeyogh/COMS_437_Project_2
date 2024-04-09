@@ -1,17 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using BEPUphysics.Constraints.TwoEntity.Joints;
-using BEPUphysics.Entities;
-using BEPUphysics.Entities.Prefabs;
-using BEPUphysics.Constraints.SolverGroups;
-using BEPUutilities;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using System;
-using BEPUphysicsDrawer.Models;
-using BEPUphysicsDrawer.Font;
+using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
+using BEPUphysics;
 
 namespace TheGreatSpaceRace
 {
@@ -20,7 +15,6 @@ namespace TheGreatSpaceRace
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public TextDrawer dataTextDrawer;
         SpriteFont dfont;
 
         //Ring[] rings = new Ring[1];
@@ -45,6 +39,10 @@ namespace TheGreatSpaceRace
 
         Vector3 position;
         float rotationY;
+
+        bool quit = false;
+
+        Space space;
 
         public Game1()
         {
@@ -83,7 +81,9 @@ namespace TheGreatSpaceRace
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
-            camera = new Camera2(_graphics, skysphere);
+            space = new Space();
+            Services.AddService(space); //now can get from anywhere that sees Game class
+            camera = new Camera2(_graphics, skysphere, this);
         }
 
         protected override void LoadContent()
@@ -91,7 +91,6 @@ namespace TheGreatSpaceRace
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             dfont = Content.Load<SpriteFont>("posdisplayfont");
-            dataTextDrawer = new TextDrawer(_spriteBatch, dfont, Color.White);
 
             //skybox = new Skybox("SunInSpace", Content);
 
@@ -100,10 +99,10 @@ namespace TheGreatSpaceRace
 
         protected override void Update(GameTime gameTime)
         {
-
+            space.Update();
             lapFinished();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || lap >= 3)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || quit)
                 Exit();
 
             checkRings();
@@ -139,7 +138,17 @@ namespace TheGreatSpaceRace
 
             _spriteBatch.Begin(rasterizerState: RasterizerState.CullNone);
                 
-                dataTextDrawer.Draw("Time Left:: " + (int)(500f - gameTime.TotalGameTime.TotalSeconds) + "s.", new System.Numerics.Vector2(50, 450));
+            if (lap < 3)
+            {
+
+                _spriteBatch.DrawString(dfont, "Time Left:: " + (int)(500f - gameTime.TotalGameTime.TotalSeconds) + "s.", new System.Numerics.Vector2(50, 450), Color.White);
+                _spriteBatch.DrawString(dfont, "Rings Missed:: " + (int)(500f - gameTime.TotalGameTime.TotalSeconds) + "s.", new System.Numerics.Vector2(50, 450), Color.White);
+            }
+            else
+            {
+                _spriteBatch.DrawString(dfont, "Time Left:: " + (int)(500f - gameTime.TotalGameTime.TotalSeconds) + "s.", new System.Numerics.Vector2(50, 450), Color.White);
+
+            }
 
             _spriteBatch.End();
 
@@ -148,18 +157,17 @@ namespace TheGreatSpaceRace
 
         public bool lapFinished()
         {
-            foreach (bool ring in ringStatus)
+            if (rings[rings.Length - 1].checkShipState(Camera2.convertVector3ToXNA(camera.ship.Position)) < 2)
             {
-                if (!ring)
-                {
-                    return false;
-                }
+                return false;
             }
             lap++;
             for (int i = 0; i < ringStatus.Length; i++)
             {
                 ringStatus[i] = false;
+                rings[i].state = 0;
             }
+            rings[0].ring = Content.Load<Model>("ringNext");
             return true;
         }
 
@@ -167,11 +175,12 @@ namespace TheGreatSpaceRace
         {
             foreach (Ring2 ring in rings)
             {
-                int state = ring.checkShipState(camera.camPosition);
+                int state = ring.checkShipState(Camera2.convertVector3ToXNA(camera.ship.Position));
                 if (ring == rings[ringCurrent] && state >= 2)
                 {
                     rings[ringCurrent].ring = Content.Load<Model>("ringComplete");
                     ringCurrent++;
+                    rings[ringCurrent].ring = Content.Load<Model>("ringNext");
                 }
             }
         }

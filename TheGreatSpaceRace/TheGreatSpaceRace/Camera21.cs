@@ -1,17 +1,31 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BEPUphysics.BroadPhaseEntries.MobileCollidables;
+using BEPUphysics.BroadPhaseEntries;
+using BEPUphysics.CollisionRuleManagement;
+using BEPUphysics.CollisionTests;
+using BEPUphysics.Entities.Prefabs;
+using BEPUphysics.NarrowPhaseSystems.Pairs;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
+using Vector3 = Microsoft.Xna.Framework.Vector3;
+using BEPUphysics.Entities;
+using BEPUphysics;
 //using Vector3 = BEPUutilities.Vector3;
 //using Matrix = BEPUutilities.Vector3;
 
 namespace TheGreatSpaceRace
 {
-    internal class Camera2
+    internal class Camera2 : GameComponent
     {
         //Cameras
-        Vector3 camTarget;
-        public Vector3 camPosition;
+
+        public Entity ship;
+        BEPUutilities.Vector3 camPositionPhysics;
+
+
+
         Matrix projectionMatrix;
         Matrix viewMatrix;
         Matrix worldMatrix;
@@ -24,76 +38,60 @@ namespace TheGreatSpaceRace
         //Orbit
         bool orbit = false;
 
-        public Camera2(GraphicsDeviceManager graphics, Model model)
+        public Camera2(GraphicsDeviceManager graphics, Model model, Game game) : base(game)
         {
             this.model = model;
-            //setup camera
-            camTarget = new Vector3(0f, 0f, 0f);
-            camPosition = new Vector3(0f, 0f, -5);
+            camPositionPhysics = new BEPUutilities.Vector3(0f, 0f, -5);
+            ship = new Sphere(camPositionPhysics, 5, 1);
+            ship.Gravity = new BEPUutilities.Vector3(0, 0, 0); //black holes
+            ship.LinearDamping = 0.6f;
+            ship.AngularDamping = 0.6f;
+            ship.BecomeDynamic(1);
+            ((Space)Game.Services.GetService(typeof(Space))).Add(ship);
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                                MathHelper.ToRadians(45f), graphics.
                                GraphicsDevice.Viewport.AspectRatio,
-                1f, 1000f);
-            viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
-                         new Vector3(0f, 1f, 0f));// Y up
-            worldMatrix = Matrix.CreateWorld(camTarget, Vector3.
+                                1f, 1000f);
+            viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.WorldTransform.Forward),
+                         new Vector3(0f, 1f, 0f));
+            worldMatrix = Matrix.CreateWorld(convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.
                           Forward, Vector3.Up);
         }
 
+
         public void Update(GameTime gameTime)
         {
+            BEPUutilities.Matrix world = ship.WorldTransform;
             float rotationAngle = MathHelper.ToRadians(1.0f);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                float deltaX = camTarget.X - camPosition.X;
-                float deltaZ = camTarget.Z - camPosition.Z;
-                float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaX) + rotationAngle;
-                camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
-                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
-                hasRotated = true;
+                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                BEPUutilities.Vector3 v = ship.WorldTransform.Down; //right
+                ship.ApplyAngularImpulse(ref v);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                float deltaX = camTarget.X - camPosition.X;
-                float deltaZ = camTarget.Z - camPosition.Z;
-                float distance = (float)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
-                float angle = (float)Math.Atan2(deltaZ, deltaX) - rotationAngle;
-                camTarget.X = camPosition.X + distance * (float)Math.Cos(angle);
-                camTarget.Z = camPosition.Z + distance * (float)Math.Sin(angle);
-                hasRotated = true;
+                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                BEPUutilities.Vector3 v = ship.WorldTransform.Up; //left
+                ship.ApplyAngularImpulse(ref v);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                Vector3 direction = camTarget - camPosition;
-                float distance = direction.Length();
-                direction.Normalize();
-                Vector3 right = Vector3.Cross(direction, Vector3.Up);
-                direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, rotationAngle));
-                camTarget = camPosition + direction * distance;
-                hasRotated = true;
+                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                BEPUutilities.Vector3 v = ship.WorldTransform.Right; //Up
+                ship.ApplyAngularImpulse(ref v);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                Vector3 direction = camTarget - camPosition;
-                float distance = direction.Length();
-                direction.Normalize();
-                Vector3 right = Vector3.Cross(direction, Vector3.Up);
-                direction = Vector3.Transform(direction, Matrix.CreateFromAxisAngle(right, -rotationAngle));
-                camTarget = camPosition + direction * distance;
-                hasRotated = true;
+                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                BEPUutilities.Vector3 v = ship.WorldTransform.Left; //Down
+                ship.ApplyAngularImpulse(ref v); //move
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                Vector3 direction = Vector3.Normalize(camTarget - camPosition);
-                camPosition += direction * 1f;
-                camTarget += direction * 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                Vector3 direction = Vector3.Normalize(camTarget - camPosition);
-                camPosition -= direction * 1f;
-                camTarget -= direction * 1f;
+                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                BEPUutilities.Vector3 v = ship.WorldTransform.Forward; //Forward
+                ship.ApplyLinearImpulse(ref v); //move
             }
 
 
@@ -102,8 +100,29 @@ namespace TheGreatSpaceRace
                 fixedPos = false;
             }
 
-            viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
-                         Vector3.Up);
+            viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position)
+                + convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
+        }
+
+        public static Microsoft.Xna.Framework.Matrix convertMatrixToXNA(BEPUutilities.Matrix bepuMatrix)
+        {
+            Microsoft.Xna.Framework.Matrix xnaMatrix = new Microsoft.Xna.Framework.Matrix(
+                bepuMatrix.M11, bepuMatrix.M12, bepuMatrix.M13, bepuMatrix.M14,
+                bepuMatrix.M21, bepuMatrix.M22, bepuMatrix.M23, bepuMatrix.M24,
+                bepuMatrix.M31, bepuMatrix.M32, bepuMatrix.M33, bepuMatrix.M34,
+                bepuMatrix.M41, bepuMatrix.M42, bepuMatrix.M43, bepuMatrix.M44
+            );
+
+            return xnaMatrix;
+        }
+
+        public static Microsoft.Xna.Framework.Vector3 convertVector3ToXNA(BEPUutilities.Vector3 bepuVec)
+        {
+            Microsoft.Xna.Framework.Vector3 vec = new Microsoft.Xna.Framework.Vector3(
+                bepuVec.X, bepuVec.Y, bepuVec.Z
+            );
+
+            return vec;
         }
 
         public void Draw(GameTime gameTime, Ring2[] rings, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
@@ -118,7 +137,7 @@ namespace TheGreatSpaceRace
                 {
                     effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
-                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(camPosition.X, camPosition.Y, camPosition.Z);
+                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * convertMatrixToXNA(ship.WorldTransform);
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();

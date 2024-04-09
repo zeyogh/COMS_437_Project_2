@@ -11,8 +11,6 @@
           "MonoGame.Content.Builder.Task": "3.8.1.303",
           "MonoGame.Framework.WindowsDX": "3.8.1.303",
           "BEPUphysics": "1.5.2.0",
-          "BEPUphysicsDemos": "1.5.1.0",
-          "BEPUphysicsDrawer": "1.5.1.0",
           "BEPUutilities": "1.5.1.0",
           "ConversionHelper": "1.5.1.0",
           "SharpDX.RawInput": "2.6.3.0"
@@ -1489,22 +1487,6 @@
           }
         }
       },
-      "BEPUphysicsDemos/1.5.1.0": {
-        "runtime": {
-          "BEPUphysicsDemos.exe": {
-            "assemblyVersion": "1.5.1.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "BEPUphysicsDrawer/1.5.1.0": {
-        "runtime": {
-          "BEPUphysicsDrawer.dll": {
-            "assemblyVersion": "1.5.1.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "BEPUutilities/1.5.1.0": {
         "runtime": {
           "BEPUutilities.dll": {
@@ -1526,14 +1508,6 @@
           "SharpDX.RawInput.dll": {
             "assemblyVersion": "2.6.3.0",
             "fileVersion": "2.6.3.0"
-          }
-        }
-      },
-      "BEPUik/1.5.1.0": {
-        "runtime": {
-          "BEPUik.dll": {
-            "assemblyVersion": "1.5.1.0",
-            "fileVersion": "1.5.1.0"
           }
         }
       }
@@ -2397,16 +2371,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "BEPUphysicsDemos/1.5.1.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "BEPUphysicsDrawer/1.5.1.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "BEPUutilities/1.5.1.0": {
       "type": "reference",
       "serviceable": false,
@@ -2418,11 +2382,6 @@
       "sha512": ""
     },
     "SharpDX.RawInput/2.6.3.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "BEPUik/1.5.1.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
