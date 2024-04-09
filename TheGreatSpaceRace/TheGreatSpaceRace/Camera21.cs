@@ -44,25 +44,23 @@ namespace TheGreatSpaceRace
             camPositionPhysics = new BEPUutilities.Vector3(0f, 0f, -5);
             ship = new Sphere(camPositionPhysics, 5, 1);
             ship.Gravity = new BEPUutilities.Vector3(0, 0, 0); //black holes
-            ship.LinearDamping = 0.6f;
-            ship.AngularDamping = 0.6f;
+            ship.LinearDamping = 0.8f;
+            ship.AngularDamping = 0.95f;
             ship.BecomeDynamic(1);
             ((Space)Game.Services.GetService(typeof(Space))).Add(ship);
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                                MathHelper.ToRadians(45f), graphics.
                                GraphicsDevice.Viewport.AspectRatio,
                                 1f, 1000f);
-            viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.WorldTransform.Forward),
-                         new Vector3(0f, 1f, 0f));
-            worldMatrix = Matrix.CreateWorld(convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.
-                          Forward, Vector3.Up);
+            viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position + ship.WorldTransform.Forward),
+                         convertVector3ToXNA(ship.WorldTransform.Right));
+            worldMatrix = Matrix.CreateWorld(convertVector3ToXNA(ship.Position),
+                         convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
         }
 
 
         public void Update(GameTime gameTime)
         {
-            BEPUutilities.Matrix world = ship.WorldTransform;
-            float rotationAngle = MathHelper.ToRadians(1.0f);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
@@ -77,15 +75,31 @@ namespace TheGreatSpaceRace
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
-                BEPUutilities.Vector3 v = ship.WorldTransform.Right; //Up
-                ship.ApplyAngularImpulse(ref v);
+                if (ship.WorldTransform.Up.Y > 0.5f || ship.WorldTransform.Down.Z > 0) //can drift out of bounds
+                {
+                    ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                    System.Diagnostics.Debug.WriteLine("Up:" + ship.WorldTransform.Up);
+                    BEPUutilities.Vector3 v = ship.WorldTransform.Right; //Up
+                    ship.ApplyAngularImpulse(ref v);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Up Invalid:" + ship.WorldTransform.Up);
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
-                BEPUutilities.Vector3 v = ship.WorldTransform.Left; //Down
-                ship.ApplyAngularImpulse(ref v); //move
+                if (ship.WorldTransform.Down.Y < -0.5f || ship.WorldTransform.Up.Z > 0)
+                {
+                    ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                    BEPUutilities.Vector3 v = ship.WorldTransform.Left; //Down
+                    System.Diagnostics.Debug.WriteLine("Down:" + ship.WorldTransform.Down);
+                    ship.ApplyAngularImpulse(ref v); //move
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Down Invalid:" + ship.WorldTransform.Down);
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
