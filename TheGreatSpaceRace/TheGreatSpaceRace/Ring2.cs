@@ -8,10 +8,16 @@ using BEPUphysics.CollisionShapes;
 using System.Collections.Generic;
 using BEPUphysics.CollisionShapes.ConvexShapes;
 using System;
+using BEPUphysics;
+using BEPUphysics.BroadPhaseEntries.MobileCollidables;
+using BEPUphysics.BroadPhaseEntries;
+using BEPUphysics.CollisionTests;
+using BEPUphysics.NarrowPhaseSystems.Pairs;
+using BEPUphysics.CollisionRuleManagement;
 
 namespace TheGreatSpaceRace
 {
-    internal class Ring2
+    internal class Ring2 : GameComponent
     {
         public Model ring;
 
@@ -21,7 +27,7 @@ namespace TheGreatSpaceRace
 
         Entity allHits;
 
-        Sphere[] hitsBoxes;
+        Sphere[] hitsBoxes = new Sphere[20];
 
         int numSpheres = 20;
         float circleRadius = 5f; // Adjust as needed
@@ -34,7 +40,7 @@ namespace TheGreatSpaceRace
         //Math.PI * 2 // num sphere +-ijjidi cos/sin functions for unit circle
         //after building the compoundbody, use separate Trigger Entity to make event happen upon collision, probably use cylinder on side instead of box
 
-        public Ring2(Vector3 pos)
+        public Ring2(Vector3 pos, Game game) : base(game)
         {
             this.pos = pos;
             state = 0;
@@ -45,6 +51,8 @@ namespace TheGreatSpaceRace
                 float y = circleRadius * (float)Math.Sin(angle);
 
                 BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z);
+                Sphere s = new(new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z), 10, 1);
+                hitsBoxes[i] = s;
 
                 // Create the compound shape entry for the sphere
                 CompoundShapeEntry shapeEntry = new CompoundShapeEntry(new SphereShape(circleRadius), posBepu, 1f);
@@ -52,9 +60,19 @@ namespace TheGreatSpaceRace
                 // Add the shape entry to the list
                 shapeEntries.Add(shapeEntry);
             }
+            foreach (Sphere hitbox in hitsBoxes) {
+                //((Space)Game.Services.GetService(typeof(Space))).Add(hitbox);
+                //hitbox.CollisionInformation.CollisionRules.Personal = CollisionRule.NoSolver;
+                //hitbox.CollisionInformation.Events.ContactCreated += CollisionHappened;
+            }
 
             // Create the compound body using the list of shape entries
             CompoundBody compoundBody = new CompoundBody(shapeEntries);
+        }
+
+        void CollisionHappened(EntityCollidable sender, Collidable other, CollidablePairHandler pair, ContactData contact)
+        {
+            Console.WriteLine("Collision detected.");
         }
 
         public int checkShipState(Vector3 cameraPosition)

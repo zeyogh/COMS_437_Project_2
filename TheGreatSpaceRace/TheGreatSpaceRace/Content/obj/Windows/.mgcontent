@@ -9,12 +9,14 @@
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/ring.fbx</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/ringComplete.fbx</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/ringNext.fbx</File>
+    <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/spaceship.fbx</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/starry_sky_sphere_0.png</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/starry_sky_sphere.png</File>
   </SourceFiles>
   <DestFiles>
     <File>skysphere.fbx</File>
     <File>posdisplayfont.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

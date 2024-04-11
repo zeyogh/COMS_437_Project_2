@@ -24,7 +24,7 @@ namespace Space_Race.Example
         public Trigger(Game1 game)
         {
             //Create static box of size 1x1x1 at origin
-            //Box = new(Vector3.Zero, 1, 1, 1);
+            Box = new(Vector3.Zero, 1, 1, 1);
             //Add Box to physics space
             //game.Space.Add(Box);
             //Disable solver to make box generate collision events but no affect physics (like a trigger in unity)

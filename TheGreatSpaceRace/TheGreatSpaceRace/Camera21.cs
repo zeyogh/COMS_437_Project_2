@@ -12,6 +12,8 @@ using System;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using BEPUphysics.Entities;
 using BEPUphysics;
+using System.Reflection.Metadata;
+using System.Net.NetworkInformation;
 //using Vector3 = BEPUutilities.Vector3;
 //using Matrix = BEPUutilities.Vector3;
 
@@ -32,15 +34,14 @@ namespace TheGreatSpaceRace
         bool hasRotated = false;
         bool fixedPos = false;
 
-        //Geometric info
-        Model model;
+        Model sky;
 
-        //Orbit
-        bool orbit = false;
+        Model spaceship;
 
-        public Camera2(GraphicsDeviceManager graphics, Model model, Game game) : base(game)
+        public Camera2(GraphicsDeviceManager graphics, Model sky, Model spaceship, Game game) : base(game)
         {
-            this.model = model;
+            this.sky = sky;
+            this.spaceship = spaceship;
             camPositionPhysics = new BEPUutilities.Vector3(0f, 0f, -5);
             ship = new Sphere(camPositionPhysics, 5, 1);
             ship.Gravity = new BEPUutilities.Vector3(0, 0, 0); //black holes
@@ -147,7 +148,7 @@ namespace TheGreatSpaceRace
             DepthStencilState originalDepthStencilState = g.DepthStencilState;
             g.DepthStencilState = DepthStencilState.DepthRead;
 
-            foreach (ModelMesh mesh in model.Meshes)
+            foreach (ModelMesh mesh in sky.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
@@ -158,13 +159,14 @@ namespace TheGreatSpaceRace
                 }
                 mesh.Draw();
             }
-            foreach (ModelMesh mesh in model.Meshes)
+
+            foreach (ModelMesh mesh in spaceship.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
-                    effect.View = viewMatrix;
-                    effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * convertMatrixToXNA(ship.WorldTransform) * Matrix.CreateTranslation(1, -15, 1);
+                    effect.View = viewMatrix = Matrix.CreateLookAt(new Vector3(0, 5, -10), new Vector3(0, 0, 0), Vector3.Up);
+                    effect.World = worldMatrix; //Matrix.CreateTranslation(ship.Position.X, ship.Position.Y, ship.Position.Z - 5);
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();

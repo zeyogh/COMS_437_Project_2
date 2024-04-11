@@ -26,6 +26,7 @@ namespace TheGreatSpaceRace
 
         //Skybox skybox;
         Model skysphere;
+        Model spaceship;
         Matrix world = Matrix.Identity;
         Matrix view = Matrix.CreateLookAt(new Vector3(20, 0, 0), new Vector3(0, 0, 0), Vector3.UnitY);
         Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 600f, 0.1f, 100f);
@@ -74,16 +75,17 @@ namespace TheGreatSpaceRace
             GraphicsDevice.RasterizerState = RasterizerState.CullNone; //have to be careful with vertices, declare vertices in clockwise fashion
 
             skysphere = Content.Load<Model>("skysphere");
+            spaceship = Content.Load<Model>("spaceship");
             Random rand = new Random();
             for (int i = 0; i < rings.Length; i++)
             {
-                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)));
+                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)), this);
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
             space = new Space();
             Services.AddService(space); //now can get from anywhere that sees Game class
-            camera = new Camera2(_graphics, skysphere, this);
+            camera = new Camera2(_graphics, skysphere, spaceship, this);
         }
 
         protected override void LoadContent()
