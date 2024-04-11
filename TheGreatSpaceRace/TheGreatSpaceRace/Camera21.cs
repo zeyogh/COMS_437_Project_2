@@ -154,7 +154,7 @@ namespace TheGreatSpaceRace
                 {
                     effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                     effect.View = viewMatrix;
-                    effect.World = Matrix.CreateScale(30, 30, 30) * convertMatrixToXNA(ship.WorldTransform);
+                    effect.World = Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(convertVector3ToXNA(ship.Position));
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();
