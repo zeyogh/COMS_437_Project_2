@@ -7,6 +7,10 @@ using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using System;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 using BEPUphysics;
+using System.Windows.Forms;
+using BEPUphysics.Entities.Prefabs;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace TheGreatSpaceRace
 {
@@ -18,8 +22,8 @@ namespace TheGreatSpaceRace
         SpriteFont dfont;
 
         //Ring[] rings = new Ring[1];
-        Ring2[] rings = new Ring2[7];
-        bool[] ringStatus = new bool[7];
+        Ring2[] rings = new Ring2[1];
+        bool[] ringStatus = new bool[1];
         int ringCurrent = 0;
         int lap = 0;
         //Ring ring;
@@ -76,6 +80,8 @@ namespace TheGreatSpaceRace
 
             skysphere = Content.Load<Model>("skysphere");
             spaceship = Content.Load<Model>("spaceship");
+            space = new Space();
+            Services.AddService(space); //now can get from anywhere that sees Game class
             Random rand = new Random();
             for (int i = 0; i < rings.Length; i++)
             {
@@ -83,8 +89,6 @@ namespace TheGreatSpaceRace
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
-            space = new Space();
-            Services.AddService(space); //now can get from anywhere that sees Game class
             camera = new Camera2(_graphics, skysphere, spaceship, this);
         }
 
@@ -119,7 +123,28 @@ namespace TheGreatSpaceRace
             cameraPosition = distance * new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
             view = Matrix.CreateLookAt(cameraPosition, new Vector3(0, 0, 0), Vector3.UnitY);
 
-            base.Update(gameTime);
+            foreach (Ring2 ring in rings)
+            {
+                /*if (camera.spaceshipCollider.CollisionInformation.BoundingBox.Intersects(ring.compoundBody.CollisionInformation.BoundingBox))
+                {
+                    camera.ship.ApplyImpulse(camera.ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                    BEPUutilities.Vector3 v = camera.ship.WorldTransform.Backward;
+                    camera.ship.ApplyLinearImpulse(ref v);
+                    System.Diagnostics.Debug.WriteLine("Ran into compound body at" + ring.compoundBody.Position + " owned by ring at " + ring.pos);
+                }*/
+                foreach (Sphere hitbox in ring.hitBoxes)
+                {
+                    if (camera.ship.CollisionInformation.BoundingBox.Intersects(hitbox.CollisionInformation.BoundingBox))
+                    {
+                        camera.ship.ApplyImpulse(camera.ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                        BEPUutilities.Vector3 v = camera.ship.WorldTransform.Backward;
+                        camera.ship.ApplyLinearImpulse(ref v);
+                        System.Diagnostics.Debug.WriteLine("Ran into hitbox at" + hitbox.Position + " owned by ring at " + ring.pos);
+                    }
+                }
+            }
+
+                base.Update(gameTime);
         }
 
 

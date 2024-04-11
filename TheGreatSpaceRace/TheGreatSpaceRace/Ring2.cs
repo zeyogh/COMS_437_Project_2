@@ -25,15 +25,15 @@ namespace TheGreatSpaceRace
 
         public int state;
 
-        Entity allHits;
+        public Sphere[] hitBoxes = new Sphere[10];
 
-        Sphere[] hitsBoxes = new Sphere[20];
-
-        int numSpheres = 20;
-        float circleRadius = 5f; // Adjust as needed
-        float angleIncrement = MathHelper.TwoPi / 20;
+        int numSpheres = 10;
+        float circleRadius = 10f;
+        float angleIncrement = MathHelper.TwoPi / 10;
 
         List<CompoundShapeEntry> shapeEntries = new List<CompoundShapeEntry>();
+
+        public CompoundBody compoundBody;
 
         //Entity compoundBody = //list of all physicsbodies (compound shape entries) //list of 20 or so spheres basically in radius of ring (pos is center)
         //make function that builds ring of sphere, compound all those together
@@ -52,7 +52,7 @@ namespace TheGreatSpaceRace
 
                 BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z);
                 Sphere s = new(new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z), 10, 1);
-                hitsBoxes[i] = s;
+                hitBoxes[i] = s;
 
                 // Create the compound shape entry for the sphere
                 CompoundShapeEntry shapeEntry = new CompoundShapeEntry(new SphereShape(circleRadius), posBepu, 1f);
@@ -60,14 +60,15 @@ namespace TheGreatSpaceRace
                 // Add the shape entry to the list
                 shapeEntries.Add(shapeEntry);
             }
-            foreach (Sphere hitbox in hitsBoxes) {
-                //((Space)Game.Services.GetService(typeof(Space))).Add(hitbox);
-                //hitbox.CollisionInformation.CollisionRules.Personal = CollisionRule.NoSolver;
-                //hitbox.CollisionInformation.Events.ContactCreated += CollisionHappened;
+            foreach (Sphere hitbox in hitBoxes) {
+                ((Space)Game.Services.GetService(typeof(Space))).Add(hitbox);
+                hitbox.CollisionInformation.CollisionRules.Personal = CollisionRule.NoSolver;
+                hitbox.CollisionInformation.Events.ContactCreated += CollisionHappened;
             }
 
             // Create the compound body using the list of shape entries
-            CompoundBody compoundBody = new CompoundBody(shapeEntries);
+            compoundBody = new CompoundBody(shapeEntries);
+
         }
 
         void CollisionHappened(EntityCollidable sender, Collidable other, CollidablePairHandler pair, ContactData contact)

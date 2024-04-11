@@ -14,6 +14,8 @@ using BEPUphysics.Entities;
 using BEPUphysics;
 using System.Reflection.Metadata;
 using System.Net.NetworkInformation;
+using System.Windows.Forms;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 //using Vector3 = BEPUutilities.Vector3;
 //using Matrix = BEPUutilities.Vector3;
 
@@ -24,6 +26,7 @@ namespace TheGreatSpaceRace
         //Cameras
 
         public Entity ship;
+        public Entity spaceshipCollider;
         BEPUutilities.Vector3 camPositionPhysics;
 
 
@@ -44,6 +47,7 @@ namespace TheGreatSpaceRace
             this.spaceship = spaceship;
             camPositionPhysics = new BEPUutilities.Vector3(0f, 0f, -5);
             ship = new Sphere(camPositionPhysics, 5, 1);
+            spaceshipCollider = new Sphere(new BEPUutilities.Vector3(0, 5, -10), 5, 1);
             ship.Gravity = new BEPUutilities.Vector3(0, 0, 0); //black holes
             ship.LinearDamping = 0.8f;
             ship.AngularDamping = 0.95f;
@@ -80,14 +84,14 @@ namespace TheGreatSpaceRace
             {
                 if (ship.WorldTransform.Up.Y > 0.5f || ship.WorldTransform.Down.Z > 0) //can drift out of bounds
                 {
-                    ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
-                    System.Diagnostics.Debug.WriteLine("Up:" + ship.WorldTransform.Up);
+                    //ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
+                    //System.Diagnostics.Debug.WriteLine("Up:" + ship.WorldTransform.Up);
                     BEPUutilities.Vector3 v = ship.WorldTransform.Right; //Up
                     ship.ApplyAngularImpulse(ref v);
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Up Invalid:" + ship.WorldTransform.Up);
+                    //System.Diagnostics.Debug.WriteLine("Up Invalid:" + ship.WorldTransform.Up);
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
@@ -96,12 +100,12 @@ namespace TheGreatSpaceRace
                 {
                     ship.ApplyImpulse(ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
                     BEPUutilities.Vector3 v = ship.WorldTransform.Left; //Down
-                    System.Diagnostics.Debug.WriteLine("Down:" + ship.WorldTransform.Down);
+                    //System.Diagnostics.Debug.WriteLine("Down:" + ship.WorldTransform.Down);
                     ship.ApplyAngularImpulse(ref v); //move
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Down Invalid:" + ship.WorldTransform.Down);
+                    //System.Diagnostics.Debug.WriteLine("Down Invalid:" + ship.WorldTransform.Down);
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
@@ -119,6 +123,7 @@ namespace TheGreatSpaceRace
 
             viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position)
                 + convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
+
         }
 
         public static Microsoft.Xna.Framework.Matrix convertMatrixToXNA(BEPUutilities.Matrix bepuMatrix)
