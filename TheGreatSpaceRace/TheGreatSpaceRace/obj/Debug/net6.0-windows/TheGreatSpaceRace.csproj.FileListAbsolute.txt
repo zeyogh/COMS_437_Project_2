@@ -52,3 +52,4 @@ C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGrea
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\obj\Debug\net6.0-windows\TheGreatSpaceRace.genruntimeconfig.cache
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\obj\Debug\net6.0-windows\ref\TheGreatSpaceRace.dll
 C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\spaceship.xnb
+C:\Users\Zeynep\Documents\COM S 437\COMS_437_Project_2\TheGreatSpaceRace\TheGreatSpaceRace\bin\Debug\net6.0-windows\Content\collision_test_sphere.xnb

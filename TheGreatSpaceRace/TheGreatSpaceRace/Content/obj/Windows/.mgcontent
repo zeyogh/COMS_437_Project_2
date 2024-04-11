@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/../../../../skysphere.fbx</File>
+    <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/collision_test_sphere.fbx</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/File.spritefont</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/ring.fbx</File>
     <File>C:/Users/Zeynep/Documents/COM S 437/COMS_437_Project_2/TheGreatSpaceRace/TheGreatSpaceRace/Content/ringComplete.fbx</File>
@@ -15,6 +16,7 @@
   </SourceFiles>
   <DestFiles>
     <File>skysphere.fbx</File>
+    <File xsi:nil="true" />
     <File>posdisplayfont.spritefont</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />

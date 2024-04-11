@@ -21,6 +21,8 @@ namespace TheGreatSpaceRace
     {
         public Model ring;
 
+        public Model sphere;
+
         public Vector3 pos;
 
         public int state;
@@ -28,7 +30,7 @@ namespace TheGreatSpaceRace
         public Sphere[] hitBoxes = new Sphere[10];
 
         int numSpheres = 10;
-        float circleRadius = 10f;
+        float circleRadius = 5f;
         float angleIncrement = MathHelper.TwoPi / 10;
 
         List<CompoundShapeEntry> shapeEntries = new List<CompoundShapeEntry>();
@@ -40,18 +42,19 @@ namespace TheGreatSpaceRace
         //Math.PI * 2 // num sphere +-ijjidi cos/sin functions for unit circle
         //after building the compoundbody, use separate Trigger Entity to make event happen upon collision, probably use cylinder on side instead of box
 
-        public Ring2(Vector3 pos, Game game) : base(game)
+        public Ring2(Vector3 pos, Model sphere, Game game) : base(game)
         {
             this.pos = pos;
             state = 0;
+            this.sphere = sphere;
             for (int i = 0; i < numSpheres; i++)
             {
                 float angle = i * angleIncrement;
                 float x = circleRadius * (float)Math.Cos(angle);
                 float y = circleRadius * (float)Math.Sin(angle);
 
-                BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z);
-                Sphere s = new(new BEPUutilities.Vector3(pos.X, pos.Y, pos.Z), 10, 1);
+                BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X + x, pos.Y + y, pos.Z);
+                Sphere s = new(posBepu, 4, 1);
                 hitBoxes[i] = s;
 
                 // Create the compound shape entry for the sphere

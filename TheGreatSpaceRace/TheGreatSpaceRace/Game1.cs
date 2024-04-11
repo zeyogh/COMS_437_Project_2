@@ -22,8 +22,8 @@ namespace TheGreatSpaceRace
         SpriteFont dfont;
 
         //Ring[] rings = new Ring[1];
-        Ring2[] rings = new Ring2[1];
-        bool[] ringStatus = new bool[1];
+        Ring2[] rings = new Ring2[2];
+        bool[] ringStatus = new bool[2];
         int ringCurrent = 0;
         int lap = 0;
         //Ring ring;
@@ -80,12 +80,14 @@ namespace TheGreatSpaceRace
 
             skysphere = Content.Load<Model>("skysphere");
             spaceship = Content.Load<Model>("spaceship");
+
+            Model sphere = Content.Load<Model>("collision_test_sphere");
             space = new Space();
             Services.AddService(space); //now can get from anywhere that sees Game class
             Random rand = new Random();
             for (int i = 0; i < rings.Length; i++)
             {
-                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)), this);
+                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)), sphere, this);
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
@@ -132,14 +134,14 @@ namespace TheGreatSpaceRace
                     camera.ship.ApplyLinearImpulse(ref v);
                     System.Diagnostics.Debug.WriteLine("Ran into compound body at" + ring.compoundBody.Position + " owned by ring at " + ring.pos);
                 }*/
-                foreach (Sphere hitbox in ring.hitBoxes)
+                for (int i = 0; i < ring.hitBoxes.Length; i++)
                 {
-                    if (camera.ship.CollisionInformation.BoundingBox.Intersects(hitbox.CollisionInformation.BoundingBox))
+                    if (camera.ship.CollisionInformation.BoundingBox.Intersects(ring.hitBoxes[i].CollisionInformation.BoundingBox))
                     {
                         camera.ship.ApplyImpulse(camera.ship.WorldTransform.Translation, new BEPUutilities.Vector3(0, 0, 0.0001f)); //wake up
                         BEPUutilities.Vector3 v = camera.ship.WorldTransform.Backward;
                         camera.ship.ApplyLinearImpulse(ref v);
-                        System.Diagnostics.Debug.WriteLine("Ran into hitbox at" + hitbox.Position + " owned by ring at " + ring.pos);
+                        System.Diagnostics.Debug.WriteLine("Ran into hitbox " + i +" at " + ring.hitBoxes[i].Position + " owned by ring at " + ring.pos);
                     }
                 }
             }

@@ -16,6 +16,7 @@ using System.Reflection.Metadata;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
+using SharpDX.Direct2D1;
 //using Vector3 = BEPUutilities.Vector3;
 //using Matrix = BEPUutilities.Vector3;
 
@@ -180,6 +181,20 @@ namespace TheGreatSpaceRace
                     mesh.Draw();
                 }
 
+               foreach (Sphere hitBox in ring.hitBoxes) {
+                    foreach (ModelMesh mesh in ring.sphere.Meshes)
+                    {
+                        foreach (BasicEffect effect in mesh.Effects)
+                        {
+                            effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
+                            effect.View = viewMatrix;
+                            effect.World = worldMatrix * Matrix.CreateTranslation(hitBox.Position.X, hitBox.Position.Y, hitBox.Position.Z);
+                            effect.Projection = projectionMatrix;
+                        }
+                        mesh.Draw();
+                    }
+                }
+
             }
 
             foreach (ModelMesh mesh in spaceship.Meshes)
@@ -195,6 +210,29 @@ namespace TheGreatSpaceRace
             }
 
             g.DepthStencilState = originalDepthStencilState;
+        }
+
+        void DrawWireframeCircle(Vector3 center, float radius, Color color, GraphicsDevice g)
+        {
+            int segments = 32; // Number of line segments to approximate the circle
+
+            // Create vertices for the circle
+            VertexPositionColor[] vertices = new VertexPositionColor[segments + 1];
+            float angleIncrement = MathHelper.TwoPi / segments;
+            for (int i = 0; i <= segments; i++)
+            {
+                float angle = i * angleIncrement;
+                float x = center.X + radius * (float)Math.Cos(angle);
+                float y = center.Y + radius * (float)Math.Sin(angle);
+                float z = center.Z; // Assuming the circle is in the XY plane
+
+                vertices[i] = new VertexPositionColor(new Vector3(x, y, z), color);
+            }
+
+            // Draw the circle as a line strip
+            BasicEffect basicEffect = new BasicEffect(g);
+            basicEffect.CurrentTechnique.Passes[0].Apply();
+            g.DrawUserPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType.LineStrip, vertices, 0, segments);
         }
     }
 }
