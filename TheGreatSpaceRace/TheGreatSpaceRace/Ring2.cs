@@ -30,7 +30,7 @@ namespace TheGreatSpaceRace
         public Sphere[] hitBoxes = new Sphere[10];
 
         int numSpheres = 10;
-        float circleRadius = 5f;
+        float circleRadius = 10f;
         float angleIncrement = MathHelper.TwoPi / 10;
 
         List<CompoundShapeEntry> shapeEntries = new List<CompoundShapeEntry>();
@@ -54,7 +54,11 @@ namespace TheGreatSpaceRace
                 float y = circleRadius * (float)Math.Sin(angle);
 
                 BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X + x, pos.Y + y, pos.Z);
-                Sphere s = new(posBepu, 4, 1);
+                /*Vector3 d = Vector3.Transform(new Vector3(posBepu.X, posBepu.Y, posBepu.Z), Matrix.CreateScale(1, 1, 2));
+                posBepu.X = d.X;
+                posBepu.Y = d.Y;
+                posBepu.Z = d.Z;*/
+                Sphere s = new(posBepu, 1, 1);
                 hitBoxes[i] = s;
 
                 // Create the compound shape entry for the sphere

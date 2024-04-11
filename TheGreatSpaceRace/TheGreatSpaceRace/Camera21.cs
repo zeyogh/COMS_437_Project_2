@@ -175,7 +175,7 @@ namespace TheGreatSpaceRace
                     {
                         effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                         effect.View = viewMatrix;
-                        effect.World = worldMatrix * Matrix.CreateScale(10, 10, 10) * Matrix.CreateTranslation(ring.pos.X, ring.pos.Y, ring.pos.Z);
+                        effect.World = worldMatrix * Matrix.CreateScale(10, 10, 1) * Matrix.CreateTranslation(ring.pos.X, ring.pos.Y, ring.pos.Z);
                         effect.Projection = projectionMatrix;
                     }
                     mesh.Draw();
@@ -212,27 +212,5 @@ namespace TheGreatSpaceRace
             g.DepthStencilState = originalDepthStencilState;
         }
 
-        void DrawWireframeCircle(Vector3 center, float radius, Color color, GraphicsDevice g)
-        {
-            int segments = 32; // Number of line segments to approximate the circle
-
-            // Create vertices for the circle
-            VertexPositionColor[] vertices = new VertexPositionColor[segments + 1];
-            float angleIncrement = MathHelper.TwoPi / segments;
-            for (int i = 0; i <= segments; i++)
-            {
-                float angle = i * angleIncrement;
-                float x = center.X + radius * (float)Math.Cos(angle);
-                float y = center.Y + radius * (float)Math.Sin(angle);
-                float z = center.Z; // Assuming the circle is in the XY plane
-
-                vertices[i] = new VertexPositionColor(new Vector3(x, y, z), color);
-            }
-
-            // Draw the circle as a line strip
-            BasicEffect basicEffect = new BasicEffect(g);
-            basicEffect.CurrentTechnique.Passes[0].Apply();
-            g.DrawUserPrimitives(Microsoft.Xna.Framework.Graphics.PrimitiveType.LineStrip, vertices, 0, segments);
-        }
     }
 }

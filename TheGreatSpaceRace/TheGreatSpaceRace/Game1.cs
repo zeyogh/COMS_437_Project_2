@@ -87,7 +87,7 @@ namespace TheGreatSpaceRace
             Random rand = new Random();
             for (int i = 0; i < rings.Length; i++)
             {
-                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-100, 100), rand.Next(-100, 100)), sphere, this);
+                rings[i] = new Ring2(new Vector3(rand.Next(-50, 50), rand.Next(-50, 50), rand.Next(-50, 50)), sphere, this);
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
