@@ -160,18 +160,6 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }
 
-            foreach (ModelMesh mesh in spaceship.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
-                    effect.View = viewMatrix = Matrix.CreateLookAt(new Vector3(0, 5, -10), new Vector3(0, 0, 0), Vector3.Up);
-                    effect.World = worldMatrix; //Matrix.CreateTranslation(ship.Position.X, ship.Position.Y, ship.Position.Z - 5);
-                    effect.Projection = projectionMatrix;
-                }
-                mesh.Draw();
-            }
-
             foreach (Ring2 ring in rings)
             {
 
@@ -189,6 +177,17 @@ namespace TheGreatSpaceRace
 
             }
 
+            foreach (ModelMesh mesh in spaceship.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
+                    effect.View = Matrix.CreateLookAt(new Vector3(0, 5, -10), convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
+                    effect.World = worldMatrix; //Matrix.CreateTranslation(ship.Position.X, ship.Position.Y, ship.Position.Z - 5);
+                    effect.Projection = projectionMatrix;
+                }
+                mesh.Draw();
+            }
 
             g.DepthStencilState = originalDepthStencilState;
         }
