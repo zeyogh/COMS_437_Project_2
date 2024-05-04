@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
-using BEPUphysics.Entities;
 using BEPUphysics.Entities.Prefabs;
 using BEPUphysics.CollisionShapes;
 using System.Collections.Generic;
@@ -27,20 +24,17 @@ namespace TheGreatSpaceRace
 
         public int state;
 
-        public Sphere[] hitBoxes = new Sphere[10];
+        public Sphere[] hitBoxes = new Sphere[10]; //more than 10 can get laggy
+
+        public Cylinder[] holeBounds = new Cylinder[2];
 
         int numSpheres = 10;
-        float circleRadius = 10f;
+        float circleRadius = 13f;
         float angleIncrement = MathHelper.TwoPi / 10;
 
         List<CompoundShapeEntry> shapeEntries = new List<CompoundShapeEntry>();
 
         public CompoundBody compoundBody;
-
-        //Entity compoundBody = //list of all physicsbodies (compound shape entries) //list of 20 or so spheres basically in radius of ring (pos is center)
-        //make function that builds ring of sphere, compound all those together
-        //Math.PI * 2 // num sphere +-ijjidi cos/sin functions for unit circle
-        //after building the compoundbody, use separate Trigger Entity to make event happen upon collision, probably use cylinder on side instead of box
 
         public Ring2(Vector3 pos, Model sphere, Game game) : base(game)
         {
@@ -54,17 +48,11 @@ namespace TheGreatSpaceRace
                 float y = circleRadius * (float)Math.Sin(angle);
 
                 BEPUutilities.Vector3 posBepu = new BEPUutilities.Vector3(pos.X + x, pos.Y + y, pos.Z);
-                /*Vector3 d = Vector3.Transform(new Vector3(posBepu.X, posBepu.Y, posBepu.Z), Matrix.CreateScale(1, 1, 2));
-                posBepu.X = d.X;
-                posBepu.Y = d.Y;
-                posBepu.Z = d.Z;*/
                 Sphere s = new(posBepu, 1, 1);
                 hitBoxes[i] = s;
 
-                // Create the compound shape entry for the sphere
                 CompoundShapeEntry shapeEntry = new CompoundShapeEntry(new SphereShape(circleRadius), posBepu, 1f);
 
-                // Add the shape entry to the list
                 shapeEntries.Add(shapeEntry);
             }
             foreach (Sphere hitbox in hitBoxes) {
@@ -73,7 +61,25 @@ namespace TheGreatSpaceRace
                 hitbox.CollisionInformation.Events.ContactCreated += CollisionHappened;
             }
 
-            // Create the compound body using the list of shape entries
+            compoundBody = new CompoundBody(shapeEntries);
+
+
+       
+                BEPUutilities.Vector3 posBepu2 = new BEPUutilities.Vector3(pos.X, pos.Y + 2, pos.Z + 2);
+                holeBounds[0] = new Cylinder(posBepu2, 20, 15);
+
+                ((Space)Game.Services.GetService(typeof(Space))).Add(holeBounds[0]);
+                holeBounds[0].CollisionInformation.CollisionRules.Personal = CollisionRule.NoSolver;
+                holeBounds[0].CollisionInformation.Events.ContactCreated += CollisionHappened;
+
+                posBepu2 = new BEPUutilities.Vector3(pos.X, pos.Y + 2, pos.Z - 2);
+                holeBounds[1] = new Cylinder(posBepu2, 20, 15); ;
+
+                ((Space)Game.Services.GetService(typeof(Space))).Add(holeBounds[1]);
+                holeBounds[1].CollisionInformation.CollisionRules.Personal = CollisionRule.NoSolver;
+                holeBounds[1].CollisionInformation.Events.ContactCreated += CollisionHappened;
+
+
             compoundBody = new CompoundBody(shapeEntries);
 
         }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheGreatSpaceRace")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e026d431f55465e8ac8b951edd114418833cfff6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1493d6de1eaf3b1f5ad178ed8a80ead3d52b2a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheGreatSpaceRace")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheGreatSpaceRace")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

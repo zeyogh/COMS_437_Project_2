@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gQ6txP/dCfg11jne1MCHyPojXSUzJn/jXupt3y1PZ8fHNlezKoAxnxvtrIDioLCDw7zdCpBnjBjizo9pgZTyZg==",
+  "dgSpecHash": "GL5AjON//VbucEmy1cqF9i4gVu8Xildx+yE9q4HTsricCTEJA4/pg1Nv55Ifp87qbkDsq00VvI+TXx1aMm6pJg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Zeynep\\Documents\\COM S 437\\COMS_437_Project_2\\TheGreatSpaceRace\\TheGreatSpaceRace\\TheGreatSpaceRace.csproj",
   "expectedPackageFiles": [
@@ -124,7 +124,11 @@
     "C:\\Users\\Zeynep\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
     "C:\\Users\\Zeynep\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\Zeynep\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\Zeynep\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512"
+    "C:\\Users\\Zeynep\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
+    "C:\\Users\\Zeynep\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Zeynep\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Zeynep\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Zeynep\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.29\\microsoft.netcore.app.host.win-x64.6.0.29.nupkg.sha512"
   ],
   "logs": []
 }

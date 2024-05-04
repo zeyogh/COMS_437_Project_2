@@ -1,36 +1,19 @@
-﻿using BEPUphysics.BroadPhaseEntries.MobileCollidables;
-using BEPUphysics.BroadPhaseEntries;
-using BEPUphysics.CollisionRuleManagement;
-using BEPUphysics.CollisionTests;
-using BEPUphysics.Entities.Prefabs;
-using BEPUphysics.NarrowPhaseSystems.Pairs;
+﻿using BEPUphysics.Entities.Prefabs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
-using System;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using BEPUphysics.Entities;
 using BEPUphysics;
-using System.Reflection.Metadata;
-using System.Net.NetworkInformation;
-using System.Windows.Forms;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
-using SharpDX.Direct2D1;
-//using Vector3 = BEPUutilities.Vector3;
-//using Matrix = BEPUutilities.Vector3;
 
 namespace TheGreatSpaceRace
 {
     internal class Camera2 : GameComponent
     {
-        //Cameras
-
         public Entity ship;
         public Entity spaceshipCollider;
         BEPUutilities.Vector3 camPositionPhysics;
-
-
 
         Matrix projectionMatrix;
         Matrix viewMatrix;
@@ -59,9 +42,7 @@ namespace TheGreatSpaceRace
                                GraphicsDevice.Viewport.AspectRatio,
                                 1f, 1000f);
             viewMatrix = Matrix.CreateLookAt(new Vector3(0, 0, -5), new Vector3(0, 0, 0),
-                         Vector3.Up);
-            //viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position + ship.WorldTransform.Forward),
-            //convertVector3ToXNA(ship.WorldTransform.Right));
+                         convertVector3ToXNA(ship.WorldTransform.Right));
             worldMatrix = Matrix.CreateWorld(convertVector3ToXNA(ship.Position),
                          convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
         }
@@ -89,10 +70,6 @@ namespace TheGreatSpaceRace
                     //System.Diagnostics.Debug.WriteLine("Up:" + ship.WorldTransform.Up);
                     BEPUutilities.Vector3 v = ship.WorldTransform.Right; //Up
                     ship.ApplyAngularImpulse(ref v);
-                }
-                else
-                {
-                    //System.Diagnostics.Debug.WriteLine("Up Invalid:" + ship.WorldTransform.Up);
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
@@ -123,7 +100,7 @@ namespace TheGreatSpaceRace
             }
 
             viewMatrix = Matrix.CreateLookAt(convertVector3ToXNA(ship.Position), convertVector3ToXNA(ship.Position)
-                + convertVector3ToXNA(ship.WorldTransform.Forward), Vector3.Up);
+                + convertVector3ToXNA(ship.WorldTransform.Forward), convertVector3ToXNA(ship.WorldTransform.Up));
 
         }
 
@@ -151,7 +128,10 @@ namespace TheGreatSpaceRace
         public void Draw(GameTime gameTime, Ring2[] rings, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
         {
 
-            DepthStencilState originalDepthStencilState = g.DepthStencilState;
+            g.BlendState = BlendState.Opaque;
+            g.DepthStencilState = DepthStencilState.Default;
+            g.SamplerStates[0] = Microsoft.Xna.Framework.Graphics.SamplerState.LinearWrap;
+
             g.DepthStencilState = DepthStencilState.DepthRead;
 
             foreach (ModelMesh mesh in sky.Meshes)
@@ -166,6 +146,8 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }
 
+            g.DepthStencilState = DepthStencilState.Default;
+
             foreach (Ring2 ring in rings)
             {
 
@@ -175,7 +157,7 @@ namespace TheGreatSpaceRace
                     {
                         effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
                         effect.View = viewMatrix;
-                        effect.World = worldMatrix * Matrix.CreateScale(10, 10, 1) * Matrix.CreateTranslation(ring.pos.X, ring.pos.Y, ring.pos.Z);
+                        effect.World = Matrix.CreateScale(10, 10, 10) * worldMatrix * Matrix.CreateTranslation(ring.pos.X, ring.pos.Y, ring.pos.Z);
                         effect.Projection = projectionMatrix;
                     }
                     mesh.Draw();
@@ -195,6 +177,21 @@ namespace TheGreatSpaceRace
                     }
                 }
 
+                /*foreach (Cylinder cylinder in ring.holeBounds)
+                {
+                    foreach (ModelMesh mesh in ring.sphere.Meshes)
+                    {
+                        foreach (BasicEffect effect in mesh.Effects)
+                        {
+                            effect.AmbientLightColor = new Microsoft.Xna.Framework.Vector3(1f, 0, 0);
+                            effect.View = viewMatrix;
+                            effect.World = worldMatrix * Matrix.CreateTranslation(cylinder.Position.X, cylinder.Position.Y, cylinder.Position.Z);
+                            effect.Projection = projectionMatrix;
+                        }
+                        mesh.Draw();
+                    }
+                }*/
+
             }
 
             foreach (ModelMesh mesh in spaceship.Meshes)
@@ -209,7 +206,6 @@ namespace TheGreatSpaceRace
                 mesh.Draw();
             }
 
-            g.DepthStencilState = originalDepthStencilState;
         }
 
     }
