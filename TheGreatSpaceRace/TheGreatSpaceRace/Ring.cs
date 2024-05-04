@@ -14,7 +14,7 @@ using BEPUphysics.CollisionRuleManagement;
 
 namespace TheGreatSpaceRace
 {
-    internal class Ring2 : GameComponent
+    internal class Ring : GameComponent
     {
         public Model ring;
 
@@ -36,7 +36,7 @@ namespace TheGreatSpaceRace
 
         public CompoundBody compoundBody;
 
-        public Ring2(Vector3 pos, Model sphere, Game game) : base(game)
+        public Ring(Vector3 pos, Model sphere, Game game) : base(game)
         {
             this.pos = pos;
             state = 0;

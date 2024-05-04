@@ -19,7 +19,7 @@ namespace TheGreatSpaceRace
 
         SpriteFont dfont;
 
-        Ring2[] rings = new Ring2[10];
+        Ring[] rings = new Ring[10];
         bool[] ringStatus = new bool[10];
         int ringCurrent = 0;
         int ringsMissed = 0;
@@ -36,7 +36,7 @@ namespace TheGreatSpaceRace
         float angle = 0;
         float distance = 20;
 
-        Camera2 camera;
+        Camera camera;
 
         BasicEffect effect; //lighting and shading
 
@@ -80,11 +80,11 @@ namespace TheGreatSpaceRace
             Random rand = new Random();
             for (int i = 0; i < rings.Length; i++)
             {
-                rings[i] = new Ring2(new Vector3(rand.Next(-100, 100), rand.Next(-5, 5), rand.Next(-100, 100)), sphere, this);
+                rings[i] = new Ring(new Vector3(rand.Next(-100, 100), rand.Next(-5, 5), rand.Next(-100, 100)), sphere, this);
                 rings[i].ring = Content.Load<Model>("ring");
             }
             rings[0].ring = Content.Load<Model>("ringNext");
-            camera = new Camera2(_graphics, skysphere, spaceship, this);
+            camera = new Camera(_graphics, skysphere, spaceship, this);
         }
 
         protected override void LoadContent()
@@ -113,7 +113,7 @@ namespace TheGreatSpaceRace
             cameraPosition = distance * new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
             view = Matrix.CreateLookAt(cameraPosition, new Vector3(0, 0, 0), Vector3.UnitY);
 
-            foreach (Ring2 ring in rings)
+            foreach (Ring ring in rings)
             {
                 for (int i = 0; i < ring.hitBoxes.Length; i++)
                 {
@@ -162,7 +162,7 @@ namespace TheGreatSpaceRace
                 base.Update(gameTime);
         }
 
-        private void manageStates(Ring2 r, char state, GameTime gameTime)
+        private void manageStates(Ring r, char state, GameTime gameTime)
         {
             if (states.Length < 3)
             {

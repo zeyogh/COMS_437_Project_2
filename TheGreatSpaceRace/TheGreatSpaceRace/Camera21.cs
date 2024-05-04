@@ -9,7 +9,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace TheGreatSpaceRace
 {
-    internal class Camera2 : GameComponent
+    internal class Camera : GameComponent
     {
         public Entity ship;
         public Entity spaceshipCollider;
@@ -25,7 +25,7 @@ namespace TheGreatSpaceRace
 
         Model spaceship;
 
-        public Camera2(GraphicsDeviceManager graphics, Model sky, Model spaceship, Game game) : base(game)
+        public Camera(GraphicsDeviceManager graphics, Model sky, Model spaceship, Game game) : base(game)
         {
             this.sky = sky;
             this.spaceship = spaceship;
@@ -125,7 +125,7 @@ namespace TheGreatSpaceRace
             return vec;
         }
 
-        public void Draw(GameTime gameTime, Ring2[] rings, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
+        public void Draw(GameTime gameTime, Ring[] rings, GraphicsDevice g, BasicEffect ringEffect, float rotationY)
         {
 
             g.BlendState = BlendState.Opaque;
@@ -148,7 +148,7 @@ namespace TheGreatSpaceRace
 
             g.DepthStencilState = DepthStencilState.Default;
 
-            foreach (Ring2 ring in rings)
+            foreach (Ring ring in rings)
             {
 
                 foreach (ModelMesh mesh in ring.ring.Meshes)
